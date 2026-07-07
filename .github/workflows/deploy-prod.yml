@@ -10,28 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del codice
-        uses: actions/checkout@v4
-
-      - name: Crea archivio deploy
-        run: tar --exclude-from=.scpignore --exclude=deploy.tar.gz -czf deploy.tar.gz .
-
-      - name: Upload archivio
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: deploy.tar.gz
-          target: /opt/bitnami/apache/htdocs/website
-
-      - name: Estrai sul server
+      - name: Deploy via git pull
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          command_timeout: 10m
           script: |
             cd /opt/bitnami/apache/htdocs/website
-            tar -xzf deploy.tar.gz
-            rm -f deploy.tar.gz
+            git fetch origin main
+            git reset --hard origin/main
+            composer install --no-dev --optimize-autoloader --no-interaction
+            php artisan config:clear
+            php artisan view:clear

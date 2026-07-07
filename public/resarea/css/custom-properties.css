@@ -1,0 +1,13 @@
+:root {
+  --primary-color: #E41817;
+}
+
+#mws-header{border-color: var(--primary-color) !important;}
+#mws-login .mws-login-button{border: 1px solid var(--primary-color) !important;}
+.btn-success{background-image:none !important; border-color:var(--primary-color) !important; background-color:var(--primary-color) !important; transition:all 0.3s}
+.btn-success:hover{background-color:#fff !important; color:var(--primary-color);}
+#mws-navigation ul li.active a{color:var(--primary-color) !important;}
+#mws-navigation > ul > li.active > ul > li > a{color:#fff !important;}
+.mws-panel .mws-panel-header span, #mws-navigation ul li.active a, #mws-navigation ul li.active span, #mws-user-tools #mws-username, #mws-navigation ul li .mws-nav-tooltip, #mws-user-tools #mws-user-info #mws-user-functions #mws-username, .ui-dialog .ui-dialog-title, .ui-state-default, .ui-state-active, .ui-state-hover, .ui-state-focus, .ui-state-default a, .ui-state-active a, .ui-state-hover a, .ui-state-focus a {
+	color:#fff !important;
+}

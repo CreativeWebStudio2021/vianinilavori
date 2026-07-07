@@ -1,0 +1,121 @@
+@include('web.common.functions')
+@extends('web.layout')
+
+@section('content')
+	@php
+		$page_title = "PRIVACY POLICY<br/>COOKIE POLICY";
+	@endphp
+	@include('web.common.page_title')
+	
+	<style>
+		h1, h2, h3 {
+		  margin-top: 2em;
+		  font-weight: bold;
+		}
+		h1 {
+		  font-size: 2em;
+		  border-bottom: 2px solid #aaa;
+		  padding-bottom: 5px;
+		}
+		h2 {
+		  font-size: 1.5em;
+		  margin-top: 1.5em;
+		}
+		h3 {
+		  font-size: 25px;
+		  margin-top: 1em;
+		  text-transform:uppercase;
+		}
+		h4 {
+		  text-transform:uppercase;
+		  font-size: 22px;
+		}
+		p {
+		  margin: 1em 0;
+		}
+		ul {
+		  margin: 1em 0;
+		  padding-left: 1.2em;
+		}
+		strong {
+		  font-weight: bold;
+		}
+		
+		.body-content-text {
+		  text-align: justify !important;
+		}
+
+		.body-content-text h3,
+		.body-content-text h4,
+		.body-content-text p,
+		.body-content-text div,
+		.body-content-text span,
+		.body-content-text li {
+		  text-align: justify !important;
+		}
+		@media screen AND (max-width:650px){
+			.body-content-text {
+			  text-align: left !important;
+			}
+			
+			.body-content-text h3,
+			.body-content-text h4,
+			.body-content-text p,
+			.body-content-text div,
+			.body-content-text span,
+			.body-content-text li {
+			  text-align: left !important;
+			}
+		}
+	  </style>
+		
+	<div class="body-content-text">
+		<div class="mainTextContainer" style="margin-bottom:100px; font-size:20px;">
+			
+
+			<h3>1. Premessa</h3>
+			Vianini Lavori S.p.A. (“Società” o “Titolare”) è titolare del trattamento dei dati personali dei visitatori del sito web della Società (“il Sito”). Quando naviga sul Sito o usufruisce di alcune funzionalità del Sito, la Società può raccogliere dati personali (“i Dati”) che la riguardano. Il presente documento (“Privacy Policy”), in conformità con quanto previsto dal Regolamento UE n. 679/2016 (“GDPR”) e dalle normative applicabili, contiene le informazioni in merito al trattamento dei Dati.
+			
+			<h3>2. Tipologie di dati, finalità e base giuridica del trattamento</h3>
+			
+			<h4>2.1 Dati di navigazione</h4>
+			Il Sito acquisisce, nel corso del suo normale funzionamento, alcuni dei suoi Dati, la cui trasmissione è necessaria per l’uso dei protocolli di comunicazione di Internet. Queste informazioni non vengono raccolte con lo scopo di identificarla. In questa categoria di Dati rientra l'indirizzo IP e il nome a dominio del suo computer, i dati di Uniform Resource Identifier, l'orario della richiesta, ed altri parametri relativi alla navigazione sul Sito, al browser o al sistema operativo utilizzato. Tali Dati sono raccolti al solo fine di ricavare informazioni statistiche anonime sull'uso del Sito e per controllarne il corretto funzionamento. I Dati così raccolti sono cancellati immediatamente dopo la loro elaborazione. I Dati potrebbero essere utilizzati per l'accertamento di responsabilità in caso di reati informatici commessi ai danni della Società o di terzi.
+			
+			<h4>2.2 Dati identificativi</h4>
+			Attraverso il Sito è possibile mettersi in contatto con la Società, utilizzando un apposito form o i contatti indicati nella apposita sezione del Sito, e comunicando in tal modo il suo nominativo e/o indirizzo email. Sempre attraverso il Sito, è possibile inoltrare candidature di lavoro. 
+			Il trattamento dei dati relativi a candidature di lavoro è oggetto dell’informativa specifica al link <b><a href="informativa-candidati.html" target="_blank">INFORMATIVA CANDIDATI</a></b>.
+			
+			<h4>2.3 Finalità e basi giuridiche del trattamento dei Dati</h4>
+			I Dati possono essere trattati, per le seguenti finalità e basi giuridiche:
+
+			a) il legittimo interesse del Titolare, in particolare per:
+			<ul>
+				<li>ricavare informazioni statistiche anonime sull'uso dei Servizi per controllarne il corretto funzionamento;</li>
+				<li>la gestione e la manutenzione del Sito, al fine di assicurarne l’operatività;</li>
+				<li>la tutela contro atti illeciti.</li>
+			</ul>
+			b) l’adempimento da parte del Titolare di obblighi di legge, quali l’ottemperanza agli obblighi previsti da leggi, regolamenti o dalla normativa nazionale e comunitaria ovvero imposti dalle Autorità competenti;
+			c) l’esecuzione di un contratto e/o le relative misure pre-contrattuali, come ad esempio per comunicare con soggetti che spontaneamente si mettono in contatto con la Società mediante il form Contatti presente sul Sito.
+			
+			<h4>2.4 Natura del conferimento</h4>
+			Il trattamento dei Dati di navigazione è necessario per consentirLe di utilizzare il Sito, pertanto, il conferimento risulta obbligatorio. In riferimento al form Contatti il conferimento di dati personali è facoltativo, in assenza la Società non potrà dare riscontro alle Sue richieste.
+			
+			<h3>3. Cookie</h3>
+			<script id="CookieDeclaration" src="https://consent.cookiebot.com/1c7b313e-7747-4854-bedb-9b001ff6b045/cd.js" type="text/javascript" async></script>
+			<?php /*I cookie sono brevi file di testo che vengono scaricati sul dispositivo dell'Utente quando si visita un sito web. Ad ogni visita successiva i cookie sono reinviati al sito web che li ha originati (cookie di prime parti) o a un altro sito che li riconosce (cookie di terze parti). Il Sito utilizza esclusivamente cookie tecnici o essenziali; non utilizza cookie di profilazione o comunque cookie che richiedono il consenso dell’utente.
+			I cookie tecnici o essenziali rendono possibili funzioni senza le quali non sarebbe possibile utilizzare appieno il Sito, e consentono al Titolare di verificarne il corretto funzionamento.
+			Rientrano nell’ambito dei cookie tecnici anche i cosiddetti “analytics” o cookie statistici, utilizzati per analizzare statisticamente gli accessi o le visite al Sito, che raccolgono informazioni in forma aggregata senza possibilità di risalire alla identificazione del singolo utente. Questi cookie possono essere disattivati e/o eliminati attraverso le impostazioni del browser. Tutti i browser moderni consentono di modificare le impostazioni dei cookies. Di solito è possibile trovare queste impostazioni nelle "opzioni" o nel menu “preferenze” del browser dell’Utente.*/?>
+			
+			<h3>4. Modalità di trattamento dei dati e conservazione dei dati</h3>
+			I Dati sono trattati con strumenti elettronici, nel rispetto dei requisiti di sicurezza richiesti dalla normativa applicabile. I Dati sono conservati per il tempo necessario all'adempimento della finalità per cui sono raccolti. In caso di comunicazione volontaria, i dati sono conservati per la durata di tre anni, o per la maggiore durata eventualmente necessaria per ottemperare agli obblighi imposti da leggi o regolamenti, per tutelare i nostri diritti, per prevenire frodi o per applicare la presente Privacy Policy.
+			
+			<h3>5. Comunicazione dei Dati</h3>
+			I suoi Dati possono essere comunicati, per il rispetto delle finalità di cui all’art. 2, alle seguenti categorie di destinatari, basati nell’Unione Europea: fornitori di servizi amministrativo‐contabili e legali; fornitori di servizi di assistenza tecnica e customer care; fornitori di servizi di marketing ed analisi di mercato; nonché categorie di destinatari basati extra Unione Europea: fornitori di servizi digitali ad es. cookie, per i quali si rimanda alle specifiche policy del fornitore. I destinatari dei dati verranno nominati dal Titolare quali Responsabili Esterni del trattamento, ai sensi dell’art. 28 GDPR, e saranno pertanto obbligati al rispetto della riservatezza e della protezione dei Suoi dati, ai sensi della normativa di riferimento.
+			
+			<h3>6. Diritti dell’interessato</h3>
+			Lei ha, in materia di dati personali, i diritti di cui agli artt. 13 e seguenti GDPR. In particolare, ha il diritto di accesso, rettifica/integrazione, cancellazione, limitazione, opposizione, portabilità dei Suoi dati. Ha inoltre diritto di ottenere informazioni sull’esistenza del trattamento, sulla sua finalità, sull’origine e sulla durata della conservazione dei Suoi dati, sull’esistenza di un processo decisionale automatizzato, compresa la profilazione, e, almeno in tali casi, informazioni significative sulla logica utilizzata, nonché l'importanza e le conseguenze previste di tale trattamento. Può infine revocare o modificare i consensi prestati. Lei può ottenere dal Titolare del Trattamento o dal Responsabile per la Protezione dei Dati chiarimenti sulla presente Informativa e sul trattamento dei Suoi dati. Può ottenere inoltre l’elenco aggiornato dei Responsabili Esterni a cui sono comunicati i Suoi dati. Per l’esercizio di tali diritti, può contattare il Titolare presso la sede sociale o all’indirizzo email privacy@vianinilavori.it ed il Responsabile per la Protezione dei Dati all’indirizzo email dpo@vianinilavori.it. Nel caso ritenga violati i Suoi diritti, può proporre reclamo al Garante per la Protezione dei Dati Personali.
+
+
+		</div>
+	</div>
+@endsection	

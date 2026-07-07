@@ -1,0 +1,303 @@
+<script>
+
+let currentSlide = 0;
+let currentStep = 2; // PARTIAMO DA 1
+let slidePrecedente = 0; // PARTIAMO DA 1
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let timelines = [];
+let headerShown = false;
+
+function animateHeaderIn() {
+  if (headerShown) return;
+
+  const header = document.getElementById('header');
+  gsap.to(header, {
+    top: 0,
+    opacity: 1,
+    ease: "power2.out",
+    duration: 1.5
+  });
+
+  headerShown = true;
+}
+
+
+let isSlowBridgeTransition = 0;
+// Mostra la slide
+function showSlide(index) {
+    const header = document.getElementById('header-wrapper');
+	let offset = 0;
+	
+
+	slides.forEach(slide => slide.classList.remove('slow-transition'));
+	if (isSlowBridgeTransition) {
+	  slides.forEach(slide => slide.classList.add('slow-transition'));
+	}
+
+	slides.forEach((slide, i) => {
+		if(index>1 && i!=0 && i!=1 && i!=3){
+			slides[i].style.top = (slides[0].offsetHeight - slides[2].offsetHeight)+"px";
+			//document.getElementById('fixedBgSlide2').style.position = "absolute";
+			//document.getElementById('fixedBgSlide2').style.top = "-"+slides[2].offsetHeight+"px";
+		}else{
+			slides[i].style.top="0px";
+			//document.getElementById('fixedBgSlide2').style.top = "0px";
+			//document.getElementById('fixedBgSlide2').style.backgroundPosition = "top center";
+		}
+		slides[2].style.top = (slides[0].offsetHeight - slides[2].offsetHeight)+"px";
+		
+		if(index>3 && i>3){
+			slides[i].style.top="0px";
+		}
+		if(index>2){
+			//document.getElementById('fixedBgSlide2').style.opacity = "0";
+		}else{
+			//document.getElementById('fixedBgSlide2').style.opacity = "1";		
+		}
+		
+		offset = ((i - (index)) * 100);
+		if(i>2){
+			offset = ((i - (index+(i-3))) * 100);			
+		}
+		slide.style.transform = `translateY(${offset}vh)`;
+		
+		updateHeaderMode(index);	
+		if (mobileMenuOpen) {
+			mobileMenuIcon.src='web/images/clode_panel.png';
+			logo.src = 'web/images/logo_vianini-trasp2.png';
+		}else{
+			if(index==0){
+				header.classList.remove('hovered');
+				mobileMenuIcon.src='web/images/nav-bars-w.png';
+				logo.src = 'web/images/logo_vianini-trasp_w.png';
+			}else{
+				mobileMenuIcon.src='web/images/nav-bars.png';
+				logo.src = 'web/images/logo_vianini-trasp2.png';
+			}
+		}
+	  });
+}
+
+
+function updateHeaderMode(index) {
+  const header = document.getElementById('header-wrapper');
+  const logo = document.getElementById('header-logo');
+  const linkedin = document.getElementById('header-linkedin');
+  const instagram = document.getElementById('header-instagram');
+  const navBar = document.getElementById('mobileMenuIcon');
+
+  if (index === 0) {
+    // Slide 1 → sfondo trasparente, testo bianco
+    header.classList.remove('header-wrapper-transparent', 'text-dark');
+    logo.src = 'web/images/logo_vianini-trasp_w.png';
+    linkedin.src = 'web/images/linkedin_w.png';
+    instagram.src = 'web/images/instagram_w.png';
+    navBar.src = 'web/images/nav-bars-w.png';
+  } else {
+    // Slide 2 o 3 → sfondo trasparente, testo nero
+    header.classList.add('header-wrapper-transparent', 'text-dark');
+    logo.src = 'web/images/logo_vianini-trasp2.png';
+    linkedin.src = 'web/images/linkedin_b.png';
+    instagram.src = 'web/images/instagram_b.png';
+    navBar.src = 'web/images/nav-bars.png';
+  }
+}
+
+
+function isScrollableSlide(slideIndex) {  
+  return slideIndex === 1 || slideIndex === totalSlides - 1;
+}
+		
+// Crea timeline
+function createTimelines() {
+  @if($cmd=="home")
+    slides.forEach((slide, index) => {
+      const tl = gsap.timeline({ paused: true });
+
+      if (index === 0) {
+        const grandeV = slide.querySelector('#grandeV');
+
+        tl.addLabel('step1')
+          .to(grandeV, {
+            left: "-100%",
+            ease: "power2.out",
+            duration: 3,
+          }, 0)
+          .addLabel('step2'); // <-- l'header NON è più qui
+      }
+
+      timelines.push(tl);
+    });
+  @else
+	updateHeaderMode(1);
+    const header = document.getElementById('header');
+    header.style.top = "0";
+    header.style.opacity = "1";
+  @endif
+}
+
+
+createTimelines();
+@if($cmd=="home")
+	//showSlide(currentSlide);
+	timelines[currentSlide].seek('step1');
+
+	setTimeout(() => {
+	  // ✅ Avvia comunque animazione grandeV indipendentemente dalla slide
+	  const grandeV = document.querySelector('#grandeV');
+	  gsap.to(grandeV, {
+		left: "-100%",
+		ease: "power2.out",
+		duration: 3
+	  });
+
+	  // Appare l’header
+	  animateHeaderIn();
+
+	  // Fade morbido su testiSlide1
+	  gsap.fromTo('#testiSlide1', 
+		{ opacity: 0 }, 
+		{ opacity: 1, duration: 1.5, ease: "power2.out", delay: 0.5 } 
+	  );
+	}, 1000);
+
+
+
+
+	let isScrolling = false;
+
+	function nextStep() {
+	  animateHeaderIn(); // fallback
+
+	  if (currentSlide < totalSlides - 1) {
+		slidePrecedente = currentSlide;
+		currentSlide++;
+		if(currentSlide==2) {
+			isSlowBridgeTransition = 1;
+			currentSlide=3;
+		}else{
+			isSlowBridgeTransition = 0;
+		}
+		
+		showSlide(currentSlide);
+		timelines[currentSlide]?.seek('step1');
+	  }
+	}
+
+
+	function previousStep() {
+	  if (currentSlide > 0) {
+		 slidePrecedente = currentSlide;
+		  
+		currentSlide--;
+			isSlowBridgeTransition = 1;
+		if(currentSlide==2) {
+			currentSlide=1;
+		}else{
+			isSlowBridgeTransition = 0;
+		}
+		// Calcolo dinamicamente quanti step ha la nuova slide
+		const stepsCount = Object.keys(timelines[currentSlide].labels).length;
+
+		showSlide(currentSlide);
+	  }
+	}
+
+	function isOverlayVisible() {
+	  return document.getElementById('projectDett')?.classList.contains('active');
+	}
+
+	// Scroll mouse
+	window.addEventListener('wheel', (e) => {
+	  if (isOverlayVisible() || isScrolling) return;
+	  isScrolling = true;
+
+	  const direction = e.deltaY > 0 ? 'down' : 'up';
+	  const scrollerId = currentSlide === 1 ? 'scrollable-slide2-content' :
+						 currentSlide === totalSlides - 1 ? 'scrollable-slide7-content' : null;
+
+	  if (scrollerId) {
+		  const scroller = document.getElementById(scrollerId);
+		  const margin = 20; // margine di tolleranza in pixel
+
+		  const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - margin;
+		  const atTop = scroller.scrollTop <= margin;
+
+		  if (direction === 'down') {
+			if (atBottom) {
+			  nextStep();
+			}
+		  } else if (direction === 'up') {
+			if (atTop) {
+			  previousStep();
+			}
+		  }
+		} else {
+		  direction === 'down' ? nextStep() : previousStep();
+		}
+
+	  setTimeout(() => {
+		isScrolling = false;
+	  }, 700);
+	});
+
+
+	// Swipe touch
+	let touchStartY = 0;
+	let touchEndY = 0;
+
+	function checkSwipe() {
+	  if (isOverlayVisible()) return;
+
+	  const threshold = 50;
+	  const direction = touchStartY - touchEndY > 0 ? 'down' : 'up';
+
+	  const scrollerId = currentSlide === 1 ? 'scrollable-slide2-content' :
+						 currentSlide === totalSlides - 1 ? 'scrollable-slide7-content' : null;
+
+	  if (scrollerId) {
+		const scroller = document.getElementById(scrollerId);
+		const margin = 20;
+		const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - margin;
+		const atTop = scroller.scrollTop <= margin;
+
+		if (direction === 'down' && atBottom && touchStartY - touchEndY > threshold) {
+		  nextStep();
+		} else if (direction === 'up' && atTop && touchEndY - touchStartY > threshold) {
+		  previousStep();
+		}
+	  } else {
+		if (touchStartY - touchEndY > threshold) {
+		  nextStep();
+		} else if (touchEndY - touchStartY > threshold) {
+		  previousStep();
+		}
+	  }
+	}
+
+
+	  // Keyboard
+	  window.addEventListener('keydown', (e) => {
+		if (isOverlayVisible()) return;
+		
+		if (e.key === 'ArrowDown') {
+		  nextStep();
+		} else if (e.key === 'ArrowUp') {
+		  previousStep();
+		}
+	  });
+
+	window.addEventListener('touchstart', (e) => {
+	  touchStartY = e.changedTouches[0].screenY;
+	});
+
+	window.addEventListener('touchend', (e) => {
+	  touchEndY = e.changedTouches[0].screenY;
+	  checkSwipe();
+	});
+
+@endif
+
+
+</script>

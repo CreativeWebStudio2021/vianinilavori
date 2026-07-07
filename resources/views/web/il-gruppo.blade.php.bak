@@ -1,0 +1,679 @@
+@include('web.common.functions')
+@extends('web.layout')
+
+@section('content')
+	@php
+		$img_background="web/images/header_il_gruppo.jpg";
+		$page_title = "IL GRUPPO";
+		$x=0;
+		$x++; $breadcrumbs[$x]['titolo']=$page_title; $breadcrumbs[$x]['link']=''; 
+	@endphp
+	@include('web.common.page_title')
+	
+	<style>
+		.layout-split-container {
+		  width: calc(100% - 240px);
+		  margin: 0 auto;
+		  display: flex;
+		  gap: 30px; 
+		}
+
+		.layout-split-block {
+		  flex: 1;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  font-family: sans-serif;
+		}
+
+		.layout-split-left {
+		  flex:0 0 30%
+		}
+
+		.layout-split-right {
+		 flex:0 0 70%;
+
+		}
+		
+		.expand-block {
+		  position: relative;
+		  //background: #fff;
+		  overflow: hidden;
+		  margin-bottom: 20px;
+		}
+
+		.expand-block__header {
+		  position: relative;
+		  padding: 15px 10px 15px 0;
+		  //background-color: white;
+		  display: flex;
+		  align-items: center;
+		  border-bottom: 2px solid #E30613;
+		}
+		
+		.expand-block,
+		.expand-block__header {
+		  width: 100%;
+		  box-sizing: border-box;
+		}
+		
+		.expand-block__title,
+		.expand-block__icon {
+		  flex-shrink: 0;
+		}
+
+		.expand-block__title {
+		  flex: 1;
+		  font-size: 40px;
+		  font-family: Arial, sans-serif;
+		  display: flex;
+		  gap: 10px;
+		  color: #000;
+		  font-weight: 400;
+		  position: relative;
+		  z-index: 2;
+		}
+
+		.expand-block__title .bold {
+		  font-weight: bold;
+		}
+
+		.expand-block__content {
+		  display: block;
+		  padding: 0;
+		  text-align:justify;
+		}
+		
+		.layout-split-block.layout-split-right {
+		  align-items: flex-start; /* invece di center */
+		  justify-content: flex-start; /* in alto */
+		  position: relative;
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		.expand-block {
+		  opacity: 0;
+		  transform: translateY(20px);
+		  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+		}
+
+		.expand-block.visible {
+		  opacity: 1;
+		  transform: translateY(0);
+		}
+
+
+
+			.circleArrowProj{
+				border:solid 1px #000;
+				cursor:pointer;
+				transition: all 0.3s ease;
+			}
+			.circleArrowProj:hover{
+				border:solid 1px #E30613;
+				background:#E30613;
+			}
+			.circleArrowProjIcon{border-color:#000 !important}
+			
+			.circleArrowProj:hover .circleArrowProjIcon{
+				border-color:#fff !important;
+			}
+			
+			.catProgInner.active-cat .nomeProg {
+				font-weight: bold;
+			}
+			
+			
+
+			.gallery-carousel {
+			  width: 100%;
+			  position: sticky;
+			  top: 120px;
+			  z-index: 5;
+			  //background: white; /* opzionale per visibilità */
+			}
+		
+		
+			.carousel-track {
+			  position: absolute;
+			  width: 100%; 
+			  height: 100%;
+			  display: flex;
+			  gap: 15px;
+			  overflow-x:auto;
+			  scroll-behavior: smooth;
+			  scrollbar-width: none;
+			  -ms-overflow-style: none
+			}
+			
+			.carousel-track::-webkit-scrollbar {
+			  display: none;              
+			}
+
+			.carousel-image {
+			  opacity: 0;
+			  transform: translateX(-250px);
+			  transition: opacity 1.5s cubic-bezier(0.15, 0.85, 0.3, 1), transform 1.5s cubic-bezier(0.15, 0.85, 0.3, 1);
+			}
+
+			.carousel-image.active {
+			  opacity: 1;
+			  transform: translateX(0);
+			}
+			
+			.link-block {
+			  display: inline-flex; /* importante: inline-block behavior con flex */
+			  align-items: center;
+			  gap: 12px; /* spazio tra testo e freccia */
+			  font-size: 30px;
+			  color: #000;
+			  text-decoration: none;
+			  transition: font-weight 0.3s;
+			  position: relative;
+			  border-bottom: 1px solid #D9D9D9;
+			  max-width: 100%;
+			  margin-top:20px;
+			}
+
+			.link-block span {
+			  transition: font-weight 0.3s;
+			  white-space: nowrap; /* evita il ritorno a capo */
+			}
+
+			.link-block .freccia {
+			  width: 12px;
+			  height: 12px;
+			  position: relative;
+			  flex-shrink: 0; /* evita che si schiacci */
+			}
+
+			.link-block .freccia::after {
+			  content: '';
+			  position: absolute;
+			  right: 0;
+			  top: 50%;
+			  transform: translateY(-50%) rotate(-45deg);
+			  width: 12px;
+			  height: 12px;
+			  border-right: 2px solid #E73338;
+			  border-bottom: 2px solid #E73338;
+			  transition: transform 0.4s ease;
+			}
+
+			.link-block:hover span {
+			  font-weight: bold;
+			}
+
+			.link-block:hover .freccia::after {
+			  transform: translate(4px, -50%) rotate(-45deg);
+			}
+			
+			.sticky-container {
+			  //position: sticky;
+			  //top: 120px;
+			  //z-index: 5;
+			  display: flex;
+			  flex-direction: column;
+			  align-items: flex-start; /* o center, come preferisci */
+			  gap: 20px;
+			  //background: white;
+			  padding-bottom: 20px;
+			}
+
+			.sticky-img {
+			  max-width: 200px;
+			  height: auto;
+			}
+			
+			.sticky-img-2{
+			  max-width: 150px;
+			  height: auto;
+			}
+
+			.sticky-link {
+			  display: inline-flex;
+			  align-items: center;
+			  gap: 12px;
+			  font-size: 24px;
+			  color: #000;
+			  text-decoration: none;
+			  border-bottom: 1px solid #D9D9D9;
+			  transition: font-weight 0.3s;
+			}
+
+			.sticky-link span {
+			  transition: font-weight 0.3s;
+			  white-space: nowrap;
+			}
+
+			.sticky-link .freccia {
+			  width: 12px;
+			  height: 12px;
+			  position: relative;
+			  flex-shrink: 0;
+			}
+
+			.sticky-link .freccia::after {
+			  content: '';
+			  position: absolute;
+			  right: 0;
+			  top: 50%;
+			  transform: translateY(-50%) rotate(-45deg);
+			  width: 12px;
+			  height: 12px;
+			  border-right: 2px solid #E73338;
+			  border-bottom: 2px solid #E73338;
+			  transition: transform 0.4s ease;
+			}
+
+			.sticky-link:hover span {
+			  font-weight: bold;
+			}
+
+			.sticky-link:hover .freccia::after {
+			  transform: translate(4px, -50%) rotate(-45deg);
+			}
+			
+			.fade-in-link {
+			  opacity: 0;
+			  transform: translateX(-250px);
+			  transition: opacity 1.5s cubic-bezier(0.15, 0.85, 0.3, 1), transform 1.5s cubic-bezier(0.15, 0.85, 0.3, 1);
+			}
+
+			.fade-in-link.visible {
+			  opacity: 1;
+			  transform: translateX(0px);
+			}
+			
+		
+		.expand-block__title span {
+		  font-weight: 600;
+		  font-size:30px;
+		}
+		
+		.linkSitoMob {
+		  opacity: 1;
+		  transform: translateX(0px);
+		  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+		}
+
+			.linkSitoMob{display:none}
+			.datiMob{display:none}
+			@media screen AND (max-width:1024px){
+				.layout-split-container{
+					 flex-direction: column-reverse;
+					 margin-bottom:20px;
+				}
+				.sticky-img{margin:0 auto;}
+				.sticky-container a{display:none}
+				.gallery-carousel{min-height:auto; padding-bottom:0;}
+				.linkSitoMob{display:inline}
+				.logoDesk{display:none}
+			}
+			@media screen AND (max-width:600px){
+				.datiMob{display:block}
+				.datiDesk{display:none}
+			}
+			
+			.dynamic-text {
+			  font-size: 24px;
+			  line-height: 1.4;
+			  transition: text-align 0.3s ease;
+			}
+
+			.center {
+				text-align: center;
+			  }
+
+			  .justify {
+				text-align: justify;
+			  }
+			  
+		#pageContainer {
+			background: url(web/images/v_grigia.png) no-repeat top center;
+			//background-size: cover;
+			background-attachment: scroll; /* default */
+			position: relative;
+			z-index: 1;
+			overflow: hidden;
+			padding-bottom:120px;
+		}
+		
+		#pageContainer::before {
+		  content: '';
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100%;
+		  background: url(web/images/v_grigia.png) no-repeat top center;
+		  //background-size: cover;
+		  transform-origin: top center; 
+		  z-index: 0;
+		  pointer-events: none;
+		  opacity: 0;
+		  animation: bgPulse 4s ease-in-out infinite;
+		}
+		#pageContainer.fixed::before {
+			transform: translateY(110px);
+			opacity: 0.4;
+		}
+		
+		@keyframes bgPulse {
+		  0% {
+			transform: scaleY(1.0) scaleX(1.0);
+			opacity: 0.7;
+		  }
+		  100% {
+			transform: scaleY(2) scaleX(1.75);
+			opacity: 0;
+		  }
+		}
+		
+		.mainTextContainer {
+			width:calc(100% - 600px) !important; 
+			margin:0 auto;
+		}
+		@media screen AND (max-width:1600px){
+			.mainTextContainer {	width:calc(100% - 400px) !important; }
+		}
+		@media screen AND (max-width:1468px){
+			.mainTextContainer {	width:calc(100% - 200px) !important; }
+		}
+		@media screen AND (max-width:500px){
+			.mainTextContainer {	width:calc(100% - 120px) !important; }
+		}
+		</style>
+	
+	<div style="width:100%; margin-top:-60px; padding-top:60px;" id="pageContainer">	
+	
+		<div class="mainTextContainer dynamic-text center" style="position:relative; z-index:1; margin-bottom:30px;" id="textBlock">
+			<p>Da sempre operiamo all'interno di un solido network industriale che ci consente di affrontare con successo progetti di rilievo nazionale e internazionale.</p>
+		</div>
+		
+		<div class="layout-split-container mainTextContainer" style="align-items: center; ">
+			<div class="layout-split-block layout-split-left">
+				<div class="gallery-carousel logoDesk">
+					<div class="sticky-container">
+					  <img src="web/images/logo-caltagirone-def.jpg" alt="Gruppo Caltagirone" class="carousel-image sticky-img">
+					  <a href="https://www.caltagironespa.it/" target="_blank" class="link-block sticky-link fade-in-link" style="margin-top:0;">
+						<span>Visita il sito</span>
+						<div class="freccia"></div>
+					  </a>
+					  </div>
+				</div>
+					
+			</div>
+			
+			<div class="layout-split-block layout-split-right">
+				<div class="expand-block">
+					<div class="expand-block__header">
+						<div class="expand-block__bg-hover"></div>
+						<div class="expand-block__title">
+							<span style="font-weight:700">La controllante</span>
+						</div>
+					</div>
+					<div class="sticky-container linkSitoMob" style="text-align:left; width:100%">
+						<img src="web/images/logo-caltagirone-def.jpg" alt="Gruppo Caltagirone" class="" style="margin-top:20px;width:200px;">
+					</div>
+					<div class="expand-block__content">
+						<p>
+							Il <strong>Gruppo Caltagirone</strong> è il cuore pulsante di uno dei principali gruppi industriali privati italiani, una <strong>holding quotata alla Borsa di Milano</strong>, con un fatturato che supera <span style="color: {{ config('app.rosso') }};"><strong>1,5 miliardi di euro</strong></span> e un patrimonio netto di circa <strong>2,1 miliardi di euro</strong>. Da oltre un secolo, il Gruppo è sinonimo di <strong>eccellenza, crescita</strong> e capacità di adattarsi alle evoluzioni del mercato, mantenendo sempre lo sguardo rivolto al futuro.
+						</p>
+						<p>
+							Il Gruppo opera in diversi <strong>settori strategici</strong> — dalla produzione di cemento e manufatti alle grandi opere infrastrutturali, dall’editoria all’immobiliare, fino alla finanza — attraverso società quotate come <strong>Cementir Holding</strong> e <strong>Caltagirone Editore</strong>, e non quotate come <strong>Vianini</strong> e <strong>Vianini Lavori</strong>.
+						</p>
+						<p>
+							Fondata da <strong>Francesco Gaetano Caltagirone</strong>, la holding è il fulcro di un gruppo nato nel settore edilizio e cresciuto fino a diventare uno dei <span style="color: {{ config('app.rosso') }};"><strong>protagonisti dell’imprenditoria privata italiana</strong></span>, grazie a una <strong>solida struttura finanziaria</strong>, una <strong>forte diversificazione geografica</strong> e una <strong>presenza consolidata</strong> nei settori chiave dell’economia.
+						</p>
+
+						<div class="linkSitoMob">
+							<a href="https://www.caltagironespa.it/" target="_blank" class="link-block" style="margin-top:0;">
+								<span><b>Visita il sito</b></span>
+								<div class="freccia"></div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="layout-split-container mainTextContainer">
+			<div class="layout-split-block layout-split-left">
+				
+			</div>
+			
+			<div class="layout-split-block layout-split-right">
+			  <div class="expand-block">
+					<div class="expand-block__header">
+						<div class="expand-block__bg-hover"></div>
+						<div class="expand-block__title">
+							<span style="font-weight:700">Principale società controllata</span>
+						</div>
+					</div>
+					<div class="sticky-container linkSitoMob" style="text-align:left; width:100%">
+						<img src="web/images/logo-eteria-def.jpg" alt="Consorzio Eteria" class="" style="margin-top:20px;width:200px;">
+					</div>
+					<div class="expand-block__content" style="padding:0;">
+						<p>
+							Il <strong>Consorzio Stabile Eteria</strong> nasce nel <span style="color: {{ config('app.rosso') }};"><strong>2021</strong></span> dall’unione strategica di due solidi gruppi industriali italiani, <strong>Gruppo Caltagirone</strong> e <strong>Gruppo Gavio</strong>, attraverso le rispettive società <strong>Vianini Lavori</strong> e <strong>Itinera</strong>. Questa alleanza si fonda su una importante esperienza nel settore e su competenze avanzate nella realizzazione di progetti infrastrutturali complessi, con l’obiettivo di operare con successo nel mercato delle costruzioni, sia pubblico che privato, in Italia.
+						</p>
+						<p>
+							La missione di Eteria è <strong>contribuire al rilancio infrastrutturale del Paese</strong>, affrontando le sfide di un contesto in costante evoluzione e progettando soluzioni che lascino un <span style="color: {{ config('app.rosso') }};"><strong>impatto positivo per le future generazioni</strong></span>. Nel tempo, il consorzio ha arricchito la sua compagine societaria con l’ingresso di nuovi partner di prestigio come <strong>ICOP</strong> e <strong>SINELEC</strong>, accrescendo il proprio <strong>know-how</strong> e le capacità operative.
+						</p>
+					</div>
+				</div>
+			  
+			</div>
+		</div>
+		
+		<div class="layout-split-container mainTextContainer" style="margin-bottom:0px !important; ">
+			<div class="layout-split-block layout-split-left">
+				<div class="gallery-carousel logoDesk">
+					<div class="sticky-container">
+					  <img src="web/images/logo-eteria-def.jpg" alt="Consorzio Eteria" class="carousel-image sticky-img sticky-img-2">
+					  <a href="https://www.consorzioeteria.it/" target="_blank" class="link-block sticky-link fade-in-link" style="margin-top:0;">
+						<span>Visita il sito</span>
+						<div class="freccia"></div>
+					  </a>
+					  </div>
+				</div>	
+			</div>
+			
+			<div class="layout-split-block layout-split-right" style="margin-bottom:100px">
+			  <div class="expand-block">
+					<div class="expand-block__content">					
+						<div style="background:#F5F5F5" class="datiDesk">
+							<div style="display:flex; padding:20px; text-align:center;">
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/logo-vianini-gruppo.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">45,45%</span>
+									<span style="margin-top:20px; font-size:0.8em">(GRUPPO CALTAGIRONE)</span>
+								</div>
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/itinera2.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">40,45%</span>
+									<span style="margin-top:20px; font-size:0.8em">(GRUPPO ASTM)</span>
+								</div>
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/icop_gruppo.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">9,10%</span>
+									<span style="margin-top:20px; font-size:0.8em"></span>
+								</div>
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/sinelec_gruppo.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">5,00%</span>
+									<span style="margin-top:20px; font-size:0.8em">(GRUPPO ASTM)</span>
+								</div>
+							</div>
+						</div>
+						
+						<div style="background:#F5F5F5" class="datiMob">
+							<div style="display:flex; padding:20px; text-align:center;">
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/logo-vianini-gruppo.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">45,45%</span>
+									<span style="margin-top:20px; font-size:0.8em">(GRUPPO CALTAGIRONE)</span>
+								</div>
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/itinera2.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">40,45%</span>
+									<span style="margin-top:20px; font-size:0.8em">(GRUPPO ASTM)</span>
+								</div>
+							</div>
+						</div>
+						
+						<div style="background:#F5F5F5" class="datiMob">
+							<div style="display:flex; padding:20px; text-align:center;">							
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/icop_gruppo.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">9,10%</span>
+									<span style="margin-top:20px; font-size:0.8em"></span>
+								</div>
+								<div style=" flex: 1; display: flex; flex-direction: column;">
+									<img src="web/images/sinelec_gruppo.png" style="width:80%; margin:0 auto;" alt="Itinera">
+									<span style="margin-top:10px;">5,00%</span>
+									<span style="margin-top:20px; font-size:0.8em">(GRUPPO ASTM)</span>
+								</div>
+							</div>
+						</div>
+						<br/>
+						<p>
+						<p>
+							In un contesto di trasformazione e ripartenza post-pandemica, <strong>Eteria</strong> rappresenta un <strong>motore di crescita</strong>, unendo competenze, innovazione e visione per dare forma alle infrastrutture del domani. <span style="color: {{ config('app.rosso') }};"><strong>Perché costruire significa creare opportunità, generare valore e tracciare nuove strade per il futuro</strong></span>.
+						</p>
+						<p>
+							Oggi, <strong>Eteria</strong> è un <strong>punto di riferimento</strong> nella progettazione e realizzazione delle infrastrutture italiane, con un impegno costante nel <strong>creare valore</strong>, <strong>migliorare la competitività del settore</strong> e contribuire alla <strong>crescita sostenibile del Paese</strong>, con una visione chiara e una solida strategia per costruire un'Italia più <span style="color: {{ config('app.rosso') }};"><strong>moderna, connessa e sostenibile</strong></span>.
+						</p>
+						<div class="linkSitoMob">
+							<a href="https://www.consorzioeteria.it/" target="_blank" class="link-block" style="margin-top:0;">
+								<span><b>Visita il sito</b></span>
+								<div class="freccia"></div>
+							</a>
+						</div>
+					</div>
+				</div>
+			  
+			</div>
+		</div>
+	</div>
+	
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Carousel Image Activation on Scroll
+  const carouselImages = document.querySelectorAll('.carousel-image');
+  if (carouselImages.length > 0) {
+    let hasAnimated = false;
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+
+          carouselImages.forEach((img, i) => {
+            img.style.transitionDelay = `${i * 0.1}s`;
+            img.classList.add('active');
+          });
+
+          observer.disconnect(); // Stop observing all
+        }
+      });
+    }, { threshold: 0.3 });
+
+    carouselImages.forEach(img => observer.observe(img));
+  }
+
+  // Carousel Scroll Buttons
+  const carouselTrack = document.getElementById('carousel-track');
+
+  if (carouselTrack) {
+    const imageWidths = Array.from(document.querySelectorAll('.carousel-image')).map(img => {
+      const style = window.getComputedStyle(img);
+      return img.offsetWidth + parseFloat(style.marginRight || 0);
+    });
+
+    let currentIndex = 0;
+
+    const easeInOutCubic = t => t < 0.5
+      ? 4 * t * t * t
+      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const smoothScrollTo = (element, target, duration) => {
+      const start = element.scrollLeft;
+      const change = target - start;
+      const startTime = performance.now();
+
+      const animateScroll = currentTime => {
+        const timeElapsed = currentTime - startTime;
+        const t = Math.min(timeElapsed / duration, 1);
+        element.scrollLeft = start + change * easeInOutCubic(t);
+        if (t < 1) requestAnimationFrame(animateScroll);
+      };
+
+      requestAnimationFrame(animateScroll);
+    };
+  }
+  
+  // FadeIn+SlideUp solo quando visibili
+	const expandBlocks = document.querySelectorAll('.expand-block');
+	
+	const observer = new IntersectionObserver((entries, obs) => {
+	  entries.forEach(entry => {
+		if (entry.isIntersecting) {
+		  setTimeout(() => {
+			entry.target.classList.add('visible');
+		  },  300);
+		  obs.unobserve(entry.target); // osserva solo una volta
+		}
+	  });
+	}, {
+	  threshold: 0.1
+	});
+
+	expandBlocks.forEach(block => observer.observe(block));
+	
+	const stickyContainers = document.querySelectorAll('.sticky-container');
+	  stickyContainers.forEach(container => {
+	  const image = container.querySelector('.carousel-image');
+	  const link = container.querySelector('.fade-in-link');
+
+	  const observer = new IntersectionObserver((entries, observer) => {
+		entries.forEach(entry => {
+		  if (entry.isIntersecting) {
+			image.classList.add('active');
+			setTimeout(() => {
+			  link.classList.add('visible');
+			}, 50);
+			observer.unobserve(entry.target); // solo una volta
+		  }
+		});
+	  }, { threshold: 0.1 });
+
+	  // 👇 importante: osserva il contenitore, non solo l'immagine
+	  observer.observe(container);
+	});
+	
+});
+</script>
+ <script>
+     function applyDynamicTextAlign(el) {
+		const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+		const lines = Math.round(el.offsetHeight / lineHeight);
+
+		if (lines > 1) {
+		  el.classList.remove('center');
+		  el.classList.add('justify');
+		} else {
+		  el.classList.remove('justify');
+		  el.classList.add('center');
+		}
+	  }
+
+	  const el = document.getElementById('textBlock');
+	  applyDynamicTextAlign(el);
+
+	  window.addEventListener('resize', () => applyDynamicTextAlign(el));
+  </script>
+@endsection	

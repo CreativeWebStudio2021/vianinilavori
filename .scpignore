@@ -1,0 +1,26 @@
+# .scpignore
+
+# Escludi backup non necessari
+backup/
+
+# Escludi report annuali pesanti (non deployabili)
+public/bilanci/
+
+# Contenuti gestiti sul server (upload admin / candidature)
+public/resarea/video/
+public/resarea/img_up/
+public/resarea/files/lavora_con_noi/
+
+# Cartelle gestite localmente da Laravel
+storage/
+bootstrap/
+
+# Config sensibili
+.env
+
+# Dipendenze front-end
+node_modules/
+
+# File temporanei
+*.log
+.DS_Store

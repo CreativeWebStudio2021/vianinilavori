@@ -1,0 +1,255 @@
+@include('web.slideHome.assets.slide1_css')
+<section class="slide" id="slide1">
+	<div style="width:100%; height:100%; position:relative; overflow:hidden;">
+		<div class="mainTextContainer">
+			<div id="orizzontalSlideSlide1">
+				<style>
+					video#background-video {
+					  position: absolute;
+					  top: 0%;
+					  left: 0%;
+					  width: 100%;
+					  height:100%;
+					  object-fit: cover;
+					  z-index: -1;
+					}
+				</style>
+				<video id="background-video" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Msg_Arena_06_2026.jpg') }}">
+				  <source src="{{ asset('resarea/video/Msg_Arena_06_2026.mp4') }}" type="video/mp4">
+				  Il tuo browser non supporta il video HTML5.
+				</video>
+				
+				<div class="titleContainerSlide1">
+					<div id="titoloSlide1" class="fade-title hidden">
+						<b>MSG Arena</b>
+					</div>
+					<div id="sottotitoloSlide1" class="fade-subtitle hidden">
+						83.500 mq | 16mila spettatori
+					</div>
+				</div>
+			</div>
+			<?php /*<div id="orizzontalSlideSlide2">
+				<div id="slide2Img1">
+					<img src="{{ asset('web/images/metro_roma_2b2.jpg') }}" alt=""/>
+				</div>
+				<div id="slide2Img2">
+					<img src="{{ asset('web/images/metro_roma_1b.jpg') }}" alt=""/>			
+				</div>
+				
+				<div class="titleContainerSlide1">
+					<div id="titoloSlide2" class="fade-title hidden">
+						<b>Metro C di Roma</b>
+					</div>
+					<div id="sottotitoloSlide2" class="fade-subtitle hidden" >
+						Roma si trasforma
+					</div>
+				</div>
+			</div>*/?>
+			<div id="orizzontalSlideSlide2">
+				<style>
+					video#background-video1 {
+					  position: absolute;
+					  top: 0%;
+					  left: 0%;
+					  width: 100%;
+					  height:100%;
+					  object-fit: cover;
+					  z-index: -1;
+					}
+				</style>
+				<video id="background-video1" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Metro_C_06_2026.jpg') }}">
+				  <source src="{{ asset('resarea/video/Metro_C_06_2026.mp4') }}" type="video/mp4">
+				  Il tuo browser non supporta il video HTML5.
+				</video> 
+
+				<div class="titleContainerSlide1">
+					<div id="titoloSlide2" class="fade-title hidden">
+						<b>Metro C di Roma</b>
+					</div>
+					<div id="sottotitoloSlide2" class="fade-subtitle hidden">
+						Roma si trasforma
+					</div>
+				</div>			
+			</div>
+			<div id="orizzontalSlideSlide3">
+				<style>
+					video#background-video2 {
+					  position: absolute;
+					  top: 0%;
+					  left: 0%;
+					  width: 100%;
+					  height:100%;
+					  object-fit: cover;
+					  z-index: -1;
+					}
+				</style>
+				<video id="background-video2" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Tai_E_Valle_Di_Cadore_06_2026.jpg') }}">
+				  <source src="{{ asset('resarea/video/Tai_E_Valle_Di_Cadore_06_2026.mp4') }}" type="video/mp4">
+				  Il tuo browser non supporta il video HTML5.
+				</video> 
+
+				<div class="titleContainerSlide1">
+					<div id="titoloSlide3" class="fade-title hidden">
+						<b>Tai e Valle di Cadore</b>
+					</div>
+					<div id="sottotitoloSlide3" class="fade-subtitle hidden">
+						Tai e Valle di Cadore: più mobilità per le Olimpiadi Milano/Cortina 2026
+					</div>
+				</div>			
+			</div>
+			<div id="orizzontalSlideSlide4">
+				<style>
+					video#background-video3 {
+					  position: absolute;
+					  top: 0%;
+					  left: 0%;
+					  width: 100%;
+					  height:100%;
+					  object-fit: cover;
+					  z-index: -1;
+					}
+				</style>
+				<video id="background-video3" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Metro_Di_Catanzaro_06_2026.jpg') }}">
+				  <source src="{{ asset('resarea/video/Metro_Di_Catanzaro_06_2026.mp4') }}" type="video/mp4">
+				  Il tuo browser non supporta il video HTML5.
+				</video> 
+
+				<div class="titleContainerSlide1">
+					<div id="titoloSlide4" class="fade-title hidden">
+						<b>Metro di Catanzaro</b>
+					</div>
+					<div id="sottotitoloSlide4" class="fade-subtitle hidden">
+						Un progetto strategico per collegare Catanzaro Sala, Catanzaro Lido e Germaneto
+					</div>
+				</div>			
+			</div>
+			
+			<div id="orizzontalSlideSlide5">
+				<style>
+					video#background-video4 {
+					  position: absolute;
+					  top: 0%;
+					  left: 0%;
+					  width: 100%;
+					  height:100%;
+					  object-fit: cover;
+					  z-index: -1;
+					}
+				</style>
+				<video id="background-video4" class="videoDesk" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Nodo_Di_Catania_06_2026.jpg') }}">
+				  <source id="video-source4" src="{{ asset('resarea/video/Nodo_Di_Catania_06_2026.mp4') }}" type="video/mp4">
+				  Il tuo browser non supporta il video HTML5.
+				</video>  
+				
+				<div class="titleContainerSlide1">
+					<div id="titoloSlide5" class="fade-title hidden">
+						<b>Nodo di Catania</b>
+					</div>
+					<div id="sottotitoloSlide5" class="fade-subtitle hidden">
+						Bla bla bla bla
+					</div>
+				</div>			
+			</div>
+			
+			
+			<style>
+				#testiSlide1{position:absolute; width:100%; height:100%; opacity:0;}
+				@media screen AND (max-width:1024px){
+					#testiSlide1{height:95%;}
+				}
+			</style>			
+			<div id="testiSlide1">
+				<div class="progettoBottContainer">
+					
+					<div class="progettoBott">
+					  <a href="#" id="scopriLink" style="text-decoration:none" class="scopriProgetto">Scopri il progetto</a>
+					</div>
+
+					
+					<!-- BOTTONE NAV SLIDE -->
+					<div class="navSlideContainer">
+					  <div class="navSlide navSlide1">
+						01<br/>
+						<b>MSG Arena</b>
+					  </div>
+					  <div class="navSlide navSlide2">
+						02<br/>
+						<b>Metro C - Roma</b>
+					  </div>
+					  <div class="navSlide navSlide3">
+						03<br/>
+						<b>Tai e Valle di Cadore</b>
+					  </div>
+					  <div class="navSlide navSlide4">
+						04<br/>
+						<b>Metro di Catanzaro</b>
+					  </div>
+					  <div class="navSlide navSlide5">
+						05<br/>
+						<b>Nodo di Catania</b>
+					  </div>
+					</div>
+					<!-- BOTTONE NEXT -->
+					<div id="nextBtn" class="nextBtnSlide1 circleArrow">
+					  <div class="slideNextSlide1"></div>
+					</div>
+					
+					<!-- BOTTONE PREV -->
+					<div id="prevBtn" class="prevBtnSlide1 circleArrow">
+					  <div class="slidePrevSlide1"></div>				  
+					</div>
+					
+					<!-- BOTTONE COOKIE -->
+					<div id="cookieButton" style="
+						position: absolute;
+						left: 0px;
+						bottom: 0px;
+						width:52px;
+						height:52px;
+						background:#E30613;
+						border-radius:26px
+					">
+						<a href="privacy-policy.html">
+							<div style="position:absolute; width:46px; height:46px; top:2px; left:3px; cursor:pointer;">
+								<img src="{{ asset('web/images/cookie.png') }}" alt="cookie Policy" />
+							</div>
+						</a>
+					</div>
+					
+					<!-- BOTTONE MAPPA -->
+					<div class="buttMapSlide1">
+					  <a href="mappa-interattiva.html" style="text-decoration:none"><div style="font-size:18px; color:#fff; width:100%; text-align:centeR; padding-top:14px;"><b>MAPPA INTERATTIVA</b></div></a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div style="position:absolute; width:100%; height:100%; overflow:hidden; top:0; left:0;" id="grandeV"> 
+			<?php /*<img src="web/images/grande_v.png" style="width:100%; height:100%; object-fit: cover; mix-blend-mode: multiply; transform: translate3d(0, 0, 0);"/> */?>
+			<img src="{{ asset('web/images/grande_v_w.png') }}" style="width:100%; height:100%; object-fit: cover;  opacity: 0.7;"/>
+		</div>
+	</div>
+</section>
+@include('web.slideHome.assets.slide1_js')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('background-video4');
+  const source = document.getElementById('video-source4');
+  const desktopSrc = "{{ asset('resarea/video/Nodo_Di_Catania_06_2026.mp4') }}";
+  const mobileSrc = "{{ asset('resarea/video/Nodo_Di_Catania_06_2026.mp4') }}";
+
+  function updateVideoSource() {
+    const isMobile = window.innerWidth <= 580;
+    const currentSrc = source.getAttribute('src');
+    const targetSrc = isMobile ? mobileSrc : desktopSrc;
+
+    if (currentSrc !== targetSrc) {
+      source.src = targetSrc;
+      video.load(); // Ricarica il video
+    }
+  }
+
+  updateVideoSource(); // chiamata iniziale
+  window.addEventListener('resize', updateVideoSource); // aggiorna al resize
+});
+</script>

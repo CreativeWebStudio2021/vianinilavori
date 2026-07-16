@@ -1,7 +1,7 @@
 <?php
 $host = $_SERVER['HTTP_HOST'] ?? 'www.vianinilavori.it';
-$productionHosts = ['63.178.20.232', 'www.vianinilavori.it', 'vianinilavori.it'];
-$ind_sito = in_array($host, $productionHosts, true) ? $host : 'www.vianinilavori.it';
+// Usa sempre l'host corrente: su test i PDF stanno in locale e su www spesso non ci sono ancora
+$ind_sito = $host;
 $http = 'https';
 
 $file = basename($_GET['file'] ?? '');

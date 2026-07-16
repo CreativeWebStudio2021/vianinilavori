@@ -25,6 +25,7 @@ class dbnew extends Config {
 		
 	public function __construct() {
 		if ($_SERVER["HTTP_HOST"]=="63.178.20.232" || $_SERVER["HTTP_HOST"]=="www.vianinilavori.it") $this->cws = true;
+		if ($_SERVER["HTTP_HOST"]=="test.vianinilavori.it") $this->testenv = true;
 		
 		if ($this->cws) {
 			$this->dir_up = "resarea/img_up";
@@ -32,6 +33,17 @@ class dbnew extends Config {
 			$this->user_db = "root";
 			$this->pass_db = "D@ExF6OxazOs";
 			$this->db_name = "vianini";
+			$this->prec_db = "";
+			$this->ind_sito = $_SERVER["HTTP_HOST"];
+			$this->mail_sito = "f.denegri@cwstudio.it";
+			$this->http = "https";
+		} elseif ($this->testenv) {
+			// Ambiente test: stesso codice di produzione, DB dedicato
+			$this->dir_up = "resarea/img_up";
+			$this->host_db = "localhost";
+			$this->user_db = "root";
+			$this->pass_db = "D@ExF6OxazOs";
+			$this->db_name = "vianini_test";
 			$this->prec_db = "";
 			$this->ind_sito = $_SERVER["HTTP_HOST"];
 			$this->mail_sito = "f.denegri@cwstudio.it";

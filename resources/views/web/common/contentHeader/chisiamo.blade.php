@@ -267,6 +267,7 @@
 				<p id="panel-left-text-sub-2"><a href="codice-etico-e-di-condotta.html" target="_blank" title="Codice Etico e di Condotta - Etica, Compliance e Whistelblowing - Governance - Chi Siamo - {{ config('app.name') }}"><span class="panel-left-text">Codice Etico e di Condotta</span></a></p>
 				<p id="panel-left-text-sub-2"><a href="rating-di-legalita.html" title="Rating di Legalità - Etica, Compliance e Whistleblowing - Governance - Chi Siamo - {{ config('app.name') }}"><span class="panel-left-text">Rating di Legalità</span></a></p>
 				<p id="panel-left-text-sub-2"><a href="whistleblowing.html" title="Whistelblowing - Etica, Compliance e Whistleblowing - Governance - Chi Siamo - {{ config('app.name') }}"><span class="panel-left-text">Whistleblowing</span></a></p>
+				<p id="panel-left-text-sub-2"><a href="segnalazioni.html" title="Segnalazioni - Etica, Compliance e Whistleblowing - Governance - Chi Siamo - {{ config('app.name') }}"><span class="panel-left-text">Segnalazioni</span></a></p>
 			</div>
 		</div>
 		

@@ -1,9 +1,9 @@
 @include('web.common.functions')
 @extends('web.layout')
 
-@section('content')
+@section('content') 
 	@php
-		$page_title = "MODELLO ORGANIZZATIVO<br/>ex D.lgs. 231/2001";
+		$page_title = "SEGNALAZIONI";
 		$img_background="web/images/header_governance.jpg";
 		$x=0;
 		$x++; $breadcrumbs[$x]['titolo']='Chi Siamo'; $breadcrumbs[$x]['link']=''; 
@@ -225,18 +225,19 @@
 		}
 
 		.link-block {
-		  flex:  0 0 auto;
-		  border-bottom: solid 1px #D9D9D9;
-		  font-size: 30px;
 		  display: flex;
 		  align-items: center;
 		  justify-content: space-between;
-		  color: #000;
-		  text-decoration: none;
-		  transition: font-weight 0.3s;
+		  flex-grow: 1;
+		  width: 100%; /* 👈 fa occupare tutta la colonna */
+		  padding: 5px 10px 5px 5px;
 		  position: relative;
-		  z-index: 5;
-		  cursor:pointer
+		  text-decoration: none;
+		  color: #000;
+		  border-bottom: 1px solid #D9D9D9;
+		  transition: background 0.3s;
+		  background: transparent;
+		  box-sizing: border-box;
 		}
 		
 		.link-block span {		 
@@ -469,8 +470,8 @@
 	}
 
 	.linkList li img.icon-li {
-	  width: 40px;
-	  height: 40px;
+	  width: 30px;
+	  height: 30px;
 	  object-fit: contain;
 	  flex-shrink: 0;
 	  margin-top: 0px;
@@ -561,11 +562,16 @@
 				width:100%; 
 			}
 		}	
-		
-		.gapStar{display:none}
-		@media screen AND (max-width:900px){			
-			.gapStar{display:inline}
-		}
+
+        ul{
+            padding-left:30px !important;
+        }
+        ul li{        
+            list-style-type: circle !important;
+            margin:0 !important;
+            margin-bottom:5px !important;
+            padding:0 !important;
+        }
 	</style>	
 	
 	<div style="width:100%; margin-top:-60px; padding-top:60px;" id="pageContainer">	
@@ -580,7 +586,7 @@
 						<span >Codice Etico e di Condotta&nbsp;</span>
 						<div class="freccia"></div>
 				  </a>
-				  <a href="rating-di-legalita.html" title="Rating di Legalità" class="link-block active	">
+				  <a href="rating-di-legalita.html" title="Rating di Legalità" class="link-block">
 						<span >Rating di Legalità&nbsp;</span>
 						<div class="freccia"></div>
 				  </a>
@@ -588,7 +594,7 @@
 						<span >Whistleblowing&nbsp;</span>
 						<div class="freccia"></div>
 				  </a>
-				  <a href="segnalazioni.html" title="Segnalazioni" class="link-block">
+				  <a href="segnalazioni.html" title="Segnalazioni" class="link-block active">
 						<span >Segnalazioni&nbsp;</span>
 						<div class="freccia"></div>
 				  </a>
@@ -598,24 +604,132 @@
 		
 		<section style="width:100%;">
 			<div class="mainTextContainer mainTextContainer2 " style="position:relative; z-index:1;">
-				<div class="expand-block__header">
-					<div class="expand-block__bg-hover"></div>
-					<div class="expand-block__title" style="margin-bottom:30px;">
-						<span style="font-size:30px; font-weight:700">RATING DI LEGALITÀ 2024-2026 <span class="gapStar"><br/></span><i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></span>
-					</div>
-				</div>
+			
 				@php
 					$query_intro = DB::table('testi_introduttivi')
 						->select('testo')
-						->where('pagina','=','Rating di Legalità')
+						->where('pagina','=','Segnalazioni')
 						->get();
 				@endphp
 				<div class="expand-block__content" style="margin-top:30px; margin-bottom:60px; border:none !important;">
-					{!! $query_intro[0]->testo !!}
+					{!! html_entity_decode($query_intro[0]->testo) !!}
 				</div>
 			</div>
 		</section>
 	</div>	
+	<script>
+		document.querySelectorAll('.iso-item').forEach(item => {
+		  item.addEventListener('click', () => {
+			const index = item.getAttribute('data-index');
+			const preview = document.getElementById('pdf-preview-' + index);
+			const isAlreadyOpen = item.classList.contains('selected');
+			// Chiudi tutto
+			document.querySelectorAll('.iso-item').forEach(i => {
+			  i.classList.remove('selected');
+			  i.querySelector('.arrow-down').style.display = 'block';
+			  i.querySelector('.icon-close-img').style.display = 'none';
+			});
+			document.querySelectorAll('.iso-pdf-preview').forEach(pre => $(pre).slideUp());
+
+			// Se clic su item già aperto: chiudilo solo
+			if (isAlreadyOpen) return;
+
+			// Altrimenti apri nuovo
+			item.classList.add('selected');
+			$(preview).slideDown();
+			animateCarouselImages(index);
+
+
+			// Aggiorna freccia/icon
+			item.querySelector('.arrow-down').style.display = 'none';
+			item.querySelector('.icon-close-img').style.display = 'block';
+		  });
+		});
+
+
+		
+		
+		function calculateImageWidths(trackElement) {
+		  const images = trackElement.querySelectorAll('.carousel-image');
+		  const Widths = [];
+
+		  images.forEach((img) => {
+			const style = window.getComputedStyle(img);
+			const width = img.offsetWidth;
+			const marginRight = parseFloat(style.marginRight) || 0;
+			Widths.push(width + marginRight);
+		  });
+
+		  return Widths;
+		}
+
+
+		function easeInOutCubic(t) {
+		  return t < 0.5
+			? 4 * t * t * t
+			: 1 - Math.pow(-2 * t + 2, 3) / 2;
+		}
+
+
+		function smoothScrollTo(element, target, duration) {
+		  const start = element.scrollLeft;
+		  const change = target - start;
+		  const startTime = performance.now();
+
+		  function animateScroll(currentTime) {
+			const timeElapsed = currentTime - startTime;
+			const t = Math.min(timeElapsed / duration, 1); // Clamp to [0,1]
+			const eased = easeInOutCubic(t);
+
+			element.scrollLeft = start + change * eased;
+
+			if (t < 1) {
+			  requestAnimationFrame(animateScroll);
+			}
+		  }
+
+		  requestAnimationFrame(animateScroll);
+		}
+
+
+		function animateCarouselImages(index) {
+		  const carouselTrack = document.getElementById('carousel-track-' + index);
+		  const images = carouselTrack.querySelectorAll('.carousel-image');
+
+		  images.forEach((img, i) => {
+			setTimeout(() => {
+			  img.style.opacity = '1';
+			  img.style.transform = 'translateX(0)';
+			}, i * 150); // Ritardo progressivo
+		  });
+		}
+		
+		document.addEventListener('DOMContentLoaded', () => {
+			const wrappers = document.querySelectorAll('.iso-wrapper');
+
+			wrappers.forEach((wrapper, i) => {
+			  wrapper.style.animationDelay = `${i * 0.15}s`;
+			});
+		  });
+	</script>
+	 <script>
+     function applyDynamicTextAlign(el) {
+		const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+		const lines = Math.round(el.offsetHeight / lineHeight);
+		if (lines > 1) {
+		  el.classList.remove('center');
+		  el.classList.add('justify');
+		} else {
+		  el.classList.remove('justify');
+		  el.classList.add('center');
+		}
+	  }
+
+	  const el = document.getElementById('textBlock');
+	  applyDynamicTextAlign(el);
+
+	  window.addEventListener('resize', () => applyDynamicTextAlign(el));
+  </script>
   
     <script>
 	document.addEventListener('DOMContentLoaded', () => {
@@ -634,8 +748,39 @@
 			introText.style.animation = 'fadeSlideUp 0.8s ease forwards';
 			introText.style.animationDelay = '400ms';
 		}
-		
+
+		// 3️⃣ Link delle due colonne
+		const columns = document.querySelectorAll('.linkList ul');
+		let delay = 800;
+
+		columns.forEach((ul, colIndex) => {
+		const items = ul.querySelectorAll('li');
+			items.forEach((li, i) => {
+				const delayMs = delay + (i * 150);
+				li.style.animationDelay = `${delayMs}ms`;
+				// 👇 attiva l'animazione con classe
+				li.classList.add('fade-slide-up'); 
+			});
+		});
+
+	});
+	
+	document.querySelectorAll('.linkList li').forEach(li => {
+		const img = li.querySelector('img.icon-li');
+		if (!img) return;
+
+		const srcOriginale = img.getAttribute('src');
+		const srcRosso = srcOriginale.replace('_b.png', '_r.png');
+
+		li.addEventListener('mouseenter', () => {
+			img.setAttribute('src', srcRosso);
+		});
+
+		li.addEventListener('mouseleave', () => {
+			img.setAttribute('src', srcOriginale);
+		});
 	});
 
-	</script>
+	
+  </script>
 @endsection	

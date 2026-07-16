@@ -293,7 +293,7 @@
 		
 		#subMenuContainer a.link-block {
 		  display: flex;
-		  flex: 0 0 25%;
+		  flex: 0 0 20%;
 		  box-sizing: border-box;
 		  align-items: center;
 		  justify-content: space-between;
@@ -573,6 +573,10 @@
 				  </a>
 				  <a href="whistleblowing.html" title="Whistleblowing" class="link-block">
 						<span >Whistleblowing&nbsp;</span>
+						<div class="freccia"></div>
+				  </a>
+				  <a href="segnalazioni.html" title="Segnalazioni" class="link-block">
+						<span >Segnalazioni&nbsp;</span>
 						<div class="freccia"></div>
 				  </a>
 				</div>

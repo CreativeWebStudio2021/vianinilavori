@@ -294,7 +294,7 @@
 		
 		#subMenuContainer a.link-block {
 		  display: flex;
-		  flex: 0 0 25%;
+		  flex: 0 0 20%;
 		  box-sizing: border-box;
 		  align-items: center;
 		  justify-content: space-between;
@@ -565,7 +565,7 @@
 	</style>	
 	
 	<div style="width:100%; margin-top:-60px; padding-top:60px;" id="pageContainer">	
-		<section style="width:100%; margin-bottom:40px;">
+	<section style="width:100%; margin-bottom:40px;">
 			<div class="mainTextContainer mainTextContainer2" style="margin-bottom:30px;">	
 				<div id="subMenuContainer">			  
 				  <a href="modello-231.html" title="Modello organizzativo ex D.lgs. 231/2001" class="link-block">
@@ -582,6 +582,10 @@
 				  </a>
 				  <a href="whistleblowing.html" title="Whistleblowing" class="link-block active">
 						<span >Whistleblowing&nbsp;</span>
+						<div class="freccia"></div>
+				  </a>
+				  <a href="segnalazioni.html" title="Segnalazioni" class="link-block">
+						<span >Segnalazioni&nbsp;</span>
 						<div class="freccia"></div>
 				  </a>
 				</div>

@@ -112,8 +112,8 @@
 			<!-- End Google Tag Manager (noscript) -->
 		@endif
 		@include('web.common.js_css_up')
-		{{-- overflow-x:hidden su .container impedisce position:sticky sui discendenti (es. nav gallery dett.) --}}
-		<div class="container" style="position:relative; @if($cmd!="home" && $cmd!="gallery_dett" && $cmd!="rassegna-stampa" && $cmd!="progetto_dett" && $cmd!="progetti") overflow-x:hidden @endif">
+		{{-- Non usare overflow-x:hidden su .container: per CSS overflow-y diventa auto e crea un secondo scrollport (doppio scroll). L'overflow orizzontale si gestisce con html { overflow-x: clip } in css.blade.php --}}
+		<div class="container" style="position:relative;">
 			@if(!empty($natale))
 				@include('web.common.natale')
 			@endif
@@ -138,7 +138,7 @@
 
 		</div>
 		
-		@include('web.common.test')
+		<?php /*@include('web.common.test')*/ ?>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 		@include('web.common.js')
 	</body>

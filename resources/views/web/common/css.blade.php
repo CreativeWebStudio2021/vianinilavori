@@ -20,6 +20,11 @@
 	  font-family: 'Arial', sans-serif;
 	}
 
+	/* clip evita overflow orizzontale senza creare uno scrollport verticale (a differenza di overflow-x:hidden) */
+	html {
+	  overflow-x: clip;
+	}
+
 	.container {
 	  width: 100%;
 	  position: relative;

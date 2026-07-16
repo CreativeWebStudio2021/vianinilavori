@@ -18,7 +18,7 @@
 		  position: relative;
 		  color: #fff;
 		  font-family: sans-serif;
-		  overflow-x:hidden;
+		  /*overflow-x:hidden;*/
 		}
 
 		.hero {

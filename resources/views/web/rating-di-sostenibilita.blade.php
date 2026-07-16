@@ -521,6 +521,50 @@
 		  border-bottom: 2px solid #000;
 		  transform: rotate(-45deg);
 		}
+
+		.rating-ecovadis-wrap {
+		  position: relative;
+		  z-index: 1;
+		  padding-bottom: 60px;
+		  padding-top: 20px;
+		  overflow: hidden; /* clearfix */
+		}
+
+		.rating-ecovadis-badge {
+		  float: left;
+		  width: 220px;
+		  max-width: 40%;
+		  height: auto;
+		  margin: 0 48px 24px 0;
+		  display: block;
+		}
+
+		.rating-ecovadis-wrap .dynamic-text,
+		.rating-ecovadis-wrap p {
+		  margin-top: 0;
+		  margin-bottom: 0;
+		  transition: padding-top 0.2s ease;
+		}
+
+		@media screen AND (max-width:650px){
+			.rating-ecovadis-badge {
+			  width: 160px;
+			  margin: 0 28px 16px 0;
+			}
+		}
+
+		@media screen AND (max-width:420px){
+			.rating-ecovadis-badge {
+			  float: none;
+			  width: 180px;
+			  max-width: 60%;
+			  margin: 0 auto 24px auto;
+			}
+			.rating-ecovadis-wrap .dynamic-text,
+			.rating-ecovadis-wrap p {
+			  padding-top: 0 !important;
+			}
+		}
 	</style>
 	<div style="width:100%; margin-top:-60px; padding-top:60px;" id="pageContainer">
 		<section style="width:100%; margin-bottom:40px;">
@@ -543,120 +587,20 @@
 		</section>
 		
 		<div class="mainTextContainer">
-			<div class="expand-block__content" style="position:relative; z-index:1;padding-bottom:60px; padding-top:20px;">
-				
-					@php
-						$query_intro = DB::table('testi_introduttivi')
-							->select('testo')
-							->where('pagina','=','Rating di Sostenibilità')
-							->get();
-					@endphp
-					{!! $query_intro[0]->testo !!}
-				
-				<style>
-						.link-block {
-						  display: inline-flex; /* importante: inline-block behavior con flex */
-						  align-items: center;
-						  gap: 12px; /* spazio tra testo e freccia */
-						  font-size: 30px;
-						  color: #000;
-						  text-decoration: none;
-						  transition: font-weight 0.3s;
-						  position: relative;
-						  border-bottom: 1px solid #D9D9D9;
-						  max-width: 100%;
-						  margin-top:20px;
-						}
-
-						.link-block span {
-						  transition: font-weight 0.3s;
-						  white-space: nowrap; /* evita il ritorno a capo */
-						}
-
-						.link-block .freccia {
-						  width: 12px;
-						  height: 12px;
-						  position: relative;
-						  flex-shrink: 0; /* evita che si schiacci */
-						}
-
-						.link-block .freccia::after {
-						  content: '';
-						  position: absolute;
-						  right: 0;
-						  top: 50%;
-						  transform: translateY(-50%) rotate(-45deg);
-						  width: 12px;
-						  height: 12px;
-						  border-right: 2px solid #E73338;
-						  border-bottom: 2px solid #E73338;
-						  transition: transform 0.4s ease;
-						}
-
-						.link-block:hover span {
-						  font-weight: bold;
-						}
-
-						.link-block:hover .freccia::after {
-						  transform: translate(4px, -50%) rotate(-45deg);
-						}
-		
-						.mainTextContainer li img.icon-li {
-						  position: absolute;
-						  left: 0;
-						  top: -3px;
-						  margin-left:-12px;
-						  width: 30px;
-						  height: 30px;
-						  object-fit: contain;
-						  flex-shrink: 0;
-						}
-						
-						.link-texts {
-						  display: flex;
-						  flex-direction: column;
-						  font-size: 28px;
-						}
-
-						.link-texts span {
-						  font-weight: bold;
-						}
-
-						.link-texts .subtitle {
-						  font-weight: normal;
-						  font-size: 20px;
-						  color: #555;
-						}
-
-					</style>
-					<section style="width:100%;">
-						<div style="position:relative; z-index:1; width:100%;">				
-							<!-- Lista -->
-						<div class="iso-list">				
-							<div class="linkList">
-								<div style="flex:1;">
-									<p>
-										<ul>
-											<li style="display: flex; align-items: center;  margin-bottom: 24.2px;">
-											  <img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="Codice Etico - Codice Etico e di Condotta - {{ config('app.name') }}">
-												<a href="{{ mostra_pdf_url('PRO_01_Rimedio-lavoro-minorile.pdf', 'Whistleblowing - ' . config('app.name'), 'doc') }}" target="_blank" title="Procedura rimedio per il lavoro minorile - {{ config('app.name') }}" target="_blank" class="link-block">
-												<div class="link-texts">
-												  <span>Procedura rimedio per il lavoro minorile</span>
-												  <div class="subtitle"></div>
-												</div>
-												<div class="freccia"></div>
-											  </a>
-											</li>
-										</ul>
-									</p>
-								</div>
-								<div style="flex:1;">
-								</div>
-							</div>
-						</div>
-					</section>
-			</div>		
-			
+			<div class="expand-block__content rating-ecovadis-wrap">
+				@php
+					$query_intro = DB::table('testi_introduttivi')
+						->select('testo')
+						->where('pagina','=','Rating di Sostenibilità')
+						->get();
+				@endphp
+				<img
+					class="rating-ecovadis-badge"
+					src="{{ asset('web/images/ecovadis-nov-2025.png') }}"
+					alt="Ecovadis Platinum 2025"
+				/>
+				{!! $query_intro[0]->testo !!}
+			</div>
 		</div>
 	</div>
 	
@@ -678,6 +622,37 @@ document.addEventListener('DOMContentLoaded', () => {
 			introText.style.animation = 'fadeSlideUp 0.8s ease forwards';
 			introText.style.animationDelay = '400ms';
 		}
+
+	// Allinea verticalmente testo e badge finché il testo non scende sotto l'immagine
+	const ratingWrap = document.querySelector('.rating-ecovadis-wrap');
+	const ratingBadge = ratingWrap ? ratingWrap.querySelector('.rating-ecovadis-badge') : null;
+	const ratingText = ratingWrap
+		? (ratingWrap.querySelector('.dynamic-text') || ratingWrap.querySelector('p'))
+		: null;
+
+	function alignRatingEcovadis() {
+		if (!ratingBadge || !ratingText) return;
+		if (window.innerWidth <= 420) {
+			ratingText.style.paddingTop = '';
+			return;
+		}
+		ratingText.style.paddingTop = '0px';
+		const imgH = ratingBadge.getBoundingClientRect().height;
+		const textH = ratingText.getBoundingClientRect().height;
+		if (imgH > 0 && textH > 0 && textH < imgH) {
+			ratingText.style.paddingTop = `${(imgH - textH) / 2}px`;
+		}
+	}
+
+	if (ratingBadge) {
+		if (ratingBadge.complete) {
+			alignRatingEcovadis();
+		} else {
+			ratingBadge.addEventListener('load', alignRatingEcovadis);
+		}
+		window.addEventListener('resize', alignRatingEcovadis);
+		window.addEventListener('load', alignRatingEcovadis);
+	}
 
   
   // FadeIn+SlideUp solo quando visibili

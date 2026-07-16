@@ -601,7 +601,7 @@
 				<div class="expand-block__header">
 					<div class="expand-block__bg-hover"></div>
 					<div class="expand-block__title" style="margin-bottom:30px;">
-						<span style="font-size:30px; font-weight:700">RATING DI LEGALITÀ 2024-2026 <span class="gapStar"><br/></span><i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></span>
+						<span style="font-size:30px; font-weight:700">RATING DI LEGALITÀ 2026-2029 <span class="gapStar"><br/></span><i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></span>
 					</div>
 				</div>
 				@php

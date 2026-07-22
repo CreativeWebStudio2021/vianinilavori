@@ -242,6 +242,11 @@ class IndexController extends Controller
 			$metatag['title'] = "Etica, Compliance e Whistleblowing";
 			$metatag['description'] = $metatag['title'];
 		}
+
+		if($cmd=="rendicontazione-di-sostenibilita"){
+			$metatag['title'] = "Rendicontazione di Sostenibilità";
+			$metatag['description'] = $metatag['title'];
+		}
 		
 		
 		if(!isset($metatag['title'])) {

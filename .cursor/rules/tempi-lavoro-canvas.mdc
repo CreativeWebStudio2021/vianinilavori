@@ -1,0 +1,20 @@
+---
+description: Report tempi automatico da transcript Cursor
+alwaysApply: true
+---
+
+# Tempi di lavoro (automatico)
+
+Canvas: [`tempi-lavoro.canvas.tsx`](/home/bitnami/.cursor/projects/opt-bitnami-apache-htdocs-test/canvases/tempi-lavoro.canvas.tsx)
+
+Script analisi: `/home/bitnami/.cursor/scripts/regen-tempi-lavoro.py`
+
+## Comportamento
+
+- **Niente timer manuale**: i tempi si stimano dai transcript agent (timestamp nei messaggi, gap ≤ 45 min) + commit git.
+- Se l’utente chiede tempi / ore / riepilogo / “aggiorna tempi”, oppure a fine sessione sostanziale:
+  1. Esegui `python3 /home/bitnami/.cursor/scripts/regen-tempi-lavoro.py`
+  2. Aggiorna il canvas `tempi-lavoro.canvas.tsx` con i giorni risultanti (dati inline, niente fetch)
+  3. Linka il canvas in chat
+- Se l’utente apre un altro workspace e manca il canvas, crealo nello stesso modo e usa lo script globale.
+- Non chiedere all’utente di compilare ore a mano salvo correzione esplicita di una stima.

@@ -4,7 +4,7 @@
 @section('content')
 	@php
 		$img_background="web/images/header_Strategia_di_sostenibilita_e_Bilanci_di_sostenibilita.jpg"; 
-		$page_title = "BILANCI DI<br/>SOSTENIBILITÀ";
+		$page_title = "RENDICONTAZIONE DI<br/>SOSTENIBILITÀ";
 		$x=0;
 	@endphp
 	@include('web.common.page_title')
@@ -520,7 +520,7 @@
 			<div class="mainTextContainer">
 				<div  class="expand-block__content" style="position:relative; z-index:1; margin-top:20px; margin-bottom:40px;">					
 					@php
-						$query_intro = DB::table('testi_introduttivi')->where('pagina', 'Bilanci di sostenibilità')->get();
+						$query_intro = DB::table('testi_introduttivi')->where('pagina', 'Rendicontazione di Sostenibilità')->get();
 					@endphp
 					@if(isset($query_intro[0]->testo) && !empty($query_intro[0]->testo))
 						{!! $query_intro[0]->testo !!}
@@ -550,7 +550,7 @@
 									$link = $item['pdf'] ? mostra_pdf_url($item['pdf'], $item['titolo'], 'bilanci') : $item['link'];
 								@endphp
 								<li>
-									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Bilanci di Sostenibilità - {{ config('app.name') }}">
+									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Rendicontazione di Sostenibilità - {{ config('app.name') }}">
 									<a href="{{ $link }}" target="_blank" class="link-block">
 										<span>{!! $item['titolo'] !!}</span>
 										<div class="freccia"></div>
@@ -566,7 +566,7 @@
 									$link = $item['pdf'] ? mostra_pdf_url($item['pdf'], $item['titolo'], 'bilanci') : $item['link'];
 								@endphp
 								<li>
-									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Bilanci di Sostenibilità - {{ config('app.name') }}">
+									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Rendicontazione di Sostenibilità - {{ config('app.name') }}">
 									<a href="{{ $link }}" target="_blank" class="link-block" style="margin-bottom:42.5px;">
 										<span>{!! $item['titolo'] !!}</span>
 										<div class="freccia"></div>

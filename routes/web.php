@@ -31,7 +31,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/bilanci-2/', function () { return redirect('/bilanci-di-esercizio.html', 301);});
 	Route::get('/bilanci-2', function () { return redirect('/bilanci-di-esercizio.html', 301);});
 	Route::get('/contact/', function () { return redirect('/contatti.html', 301);});
-	Route::get('/sostenibilita/bilanci-di-sostenibilita/', function () { return redirect('/bilanci-di-sostenibilita.html', 301);});
+	Route::get('/sostenibilita/bilanci-di-sostenibilita/', function () { return redirect('/rendicontazione-di-sostenibilita.html', 301);});
+	Route::get('/sostenibilita/rendicontazione-di-sostenibilita/', function () { return redirect('/rendicontazione-di-sostenibilita.html', 301);});
+	Route::get('/bilanci-di-sostenibilita.html', function () { return redirect('/rendicontazione-di-sostenibilita.html', 301);});
+	Route::get('/bilanci-di-sostenibilita', function () { return redirect('/rendicontazione-di-sostenibilita.html', 301);});
 	Route::get('/sostenibilita/visione-della-sostenibilita/', function () { return redirect('/strategia-di-sostenibilita.html', 301);});
 	Route::get('/la-societa/la-storia/', function () { return redirect('/un-viaggio-lungo-oltre-un-secolo.html', 301);});
 	Route::get('/ingegnere-strutturista-neolaureato/', function () { return redirect('/lavora-con-noi.html', 301);});
@@ -103,7 +106,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/wp-content/uploads/2024/07/Politica-Parita-di-Genere-Rev.-0-del-30.05.2024.pdf', function () { return redirect('/politiche.html', 301);});
 	Route::get('/bilanci-sfogliabili/VianiniLavori2023/index.html', function () { return redirect('/bilanci/VianiniLavori2023/index.html', 301);});
 	Route::get('/wp-content/uploads/2023/04/54MDI1-Politica-DI-Rev01-sito.pdf', function () { return redirect('/politiche.html', 301);});
-	Route::get('/wp-content/uploads/2023/04/Bilancio-di-sostenibilita-2022-Vianini-Lavori-web.pdf', function () { return redirect('/bilanci-di-sostenibilita.html', 301);});
+	Route::get('/wp-content/uploads/2023/04/Bilancio-di-sostenibilita-2022-Vianini-Lavori-web.pdf', function () { return redirect('/rendicontazione-di-sostenibilita.html', 301);});
 	Route::get('/wp-content/uploads/2024/10/61MD5-Rev.-1-del-29.09.2023-Politica-della-Remunerazione.pdf', function () { return redirect('/politiche.html', 301);});
 	Route::get('/bilanci-sfogliabili/VianiniLavori2022/index.html', function () { return redirect('/bilanci/VianiniLavori2022/index.html', 301);});
 	Route::get('/bilanci-sfogliabili/VianiniLavori2024/index.html', function () { return redirect('/bilanci/VianiniLavori2024/index.html', 301);});

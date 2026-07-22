@@ -266,7 +266,7 @@
 			<p><a href="rating-di-sostenibilita.html" title="Rating di Sostenibilità - Strategia di Sostenibilità - Sostenibilità - {{ config('app.name') }}"><span class="panel-left-text">Rating di Sostenibilità</span></a></p>
 			<p><a href="global-compact.html" title="Global Compact - Strategia di Sostenibilità - Sostenibilità - {{ config('app.name') }}"><span class="panel-left-text">Global Compact</span></a></p>
 		</div>
-		<p id="panel-left-text-2"><a href="bilanci-di-sostenibilita.html" title="Bilanci di Sostenibilità - Sostenibilità - {{ config('app.name') }}"><span class="panel-left-text">Bilanci di Sostenibilità</span></a></p>
+		<p id="panel-left-text-2"><a href="rendicontazione-di-sostenibilita.html" title="Rendicontazione di Sostenibilità - Sostenibilità - {{ config('app.name') }}"><span class="panel-left-text">Rendicontazione di Sostenibilità</span></a></p>
 	</div>
     <div class="panel-right" id="panel-right">
       <img src="{{ asset('web/images/header-sostenibilita-2.jpg') }}" style='width:100%;'>

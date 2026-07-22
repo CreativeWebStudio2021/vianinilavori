@@ -566,7 +566,7 @@
 									$link = $item['pdf'] ? mostra_pdf_url($item['pdf'], $item['titolo'], 'politiche') : $item['link'];
 								@endphp
 								<li>
-									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Bilanci di Sostenibilità - {{ config('app.name') }}">
+									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Politiche - {{ config('app.name') }}">
 									<a href="{{ $link }}" target="_blank" class="link-block">
 										<span>{!! $item['titolo'] !!}</span>
 										<div class="freccia"></div>
@@ -582,7 +582,7 @@
 									$link = $item['pdf'] ? mostra_pdf_url($item['pdf'], $item['titolo'], 'politiche') : $item['link'];
 								@endphp
 								<li>
-									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Bilanci di Sostenibilità - {{ config('app.name') }}">
+									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Politiche - {{ config('app.name') }}">
 									<a href="{{ $link }}" target="_blank" class="link-block" style="margin-bottom:42.5px;">
 										<span>{!! $item['titolo'] !!}</span>
 										<div class="freccia"></div>

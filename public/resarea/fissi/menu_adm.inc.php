@@ -133,7 +133,7 @@
 						<div style="padding:10px" <?php  if ($cmd=="bilanci_sostenibilita") { ?>class="activeMenu"<?php  } ?>>
 							<a href="admin.php?cmd=bilanci_sostenibilita">
 								<div class="iconMenu"><i class="fa-solid fa-file-pdf fa-2x"></i></div>
-								<div class="textMenu">Bilanci di sostenibilità</div>
+								<div class="textMenu">Rendicontazione di sostenibilità</div>
 								<div style="clear:both"></div>
 							</a>
 						</div>

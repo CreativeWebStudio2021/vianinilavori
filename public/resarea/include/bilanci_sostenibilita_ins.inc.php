@@ -17,9 +17,17 @@ $rif.="&pag_att=$pag_att";
 
 <script language="javascript">
 	function verifica(){
-		if (document.gino.titolo.value=="") alert('Titolo obbigatorio');
-		else if (document.gino.file.value=="") alert('File obbigatorio');
-		else document.gino.submit();
+		if (document.gino.titolo.value=="") {
+			alert('Titolo obbligatorio');
+			return;
+		}
+		var linkDesk = (document.gino.link.value || '').trim();
+		var fileDesk = (document.gino.file.value || '').trim();
+		if (linkDesk === '' && fileDesk === '') {
+			alert('Per il desktop inserisci un Link oppure un File');
+			return;
+		}
+		document.gino.submit();
 	}
 </script>
 <?php 
@@ -53,12 +61,15 @@ else
 			<div class="mws-form-inline">
 				<?php 
 				$oggetto_admin->campo_ins("Titolo*", "titolo" , "1", 'no');	
-				$oggetto_admin->campo_ins("Link", "link" , "1", 'no');	
-				$oggetto_admin->campo_ins("File*", "file" , "5", 'no',"","","","",$directory);	
+				$oggetto_admin->campo_ins("Link (desktop)", "link" , "1", 'no');	
+				$oggetto_admin->campo_ins("File (desktop)", "file" , "5", 'no',"","","","",$directory);
+				$oggetto_admin->campo_ins("Link (mobile)", "link_mobile" , "1", 'no');
+				$oggetto_admin->campo_ins("File (mobile)", "file_mobile" , "5", 'no',"","","","",$directory);
 				?>				
 				
 				<br/><br/>
 				<div style="margin-left:20px; padding-bottom:10px;">* <i>campi obbligatori</i></div>
+				<div style="margin-left:20px; padding-bottom:10px;"><i>Desktop e mobile sono indipendenti: puoi usare un <b>link</b> su uno e un <b>file</b> sull’altro (o due file / due link). Per ogni dispositivo, se ci sono sia link sia file, ha priorità il file. Sotto i 768px si usa la versione mobile (se valorizzata).</i></div>
 			</div>
 			<div class="mws-button-row">
 				<input type="button" value="Inserisci" class="btn btn-danger" onclick="verifica()">

@@ -503,6 +503,19 @@
 		@media screen AND (max-width:800px){
 			.linkList {	flex-direction:column; gap:20px; margin-bottom:80px; }
 		}
+
+		/* Desktop vs mobile PDF/link: sotto 768px si usa la versione mobile se presente */
+		.linkList .link-block-mobile {
+			display: none !important;
+		}
+		@media screen AND (max-width:768px){
+			.linkList .link-block-desktop.has-mobile-alt {
+				display: none !important;
+			}
+			.linkList .link-block-mobile {
+				display: flex !important;
+			}
+		}
 		
 		.mainTextContainer li img.icon-li {
 		  position: absolute;
@@ -531,10 +544,25 @@
 					$query_bil = DB::table('bilanci_sostenibilita')->orderBy('ordine', 'DESC')->get();
 
 					$bilanci = $query_bil->map(function($item) {
+						$pdf = $item->file ?? '';
+						$link = $item->link ?? '';
+						$pdfMobile = $item->file_mobile ?? '';
+						$linkMobile = $item->link_mobile ?? '';
+
+						$hrefDesktop = $pdf !== '' && $pdf !== null
+							? mostra_pdf_url($pdf, $item->titolo, 'bilanci')
+							: $link;
+						$hrefMobile = null;
+						if ($pdfMobile !== '' && $pdfMobile !== null) {
+							$hrefMobile = mostra_pdf_url($pdfMobile, $item->titolo . ' (mobile)', 'bilanci');
+						} elseif ($linkMobile !== '' && $linkMobile !== null) {
+							$hrefMobile = $linkMobile;
+						}
+
 						return [
 							'titolo' => $item->titolo,
-							'pdf' => $item->file,
-							'link' => $item->link
+							'href_desktop' => $hrefDesktop,
+							'href_mobile' => $hrefMobile,
 						];
 					})->all();
 
@@ -546,15 +574,18 @@
 					<div style="flex:1;">
 						<ul>
 							@foreach($bilanci_1 as $item)
-								@php
-									$link = $item['pdf'] ? mostra_pdf_url($item['pdf'], $item['titolo'], 'bilanci') : $item['link'];
-								@endphp
 								<li>
 									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Rendicontazione di Sostenibilità - {{ config('app.name') }}">
-									<a href="{{ $link }}" target="_blank" class="link-block">
+									<a href="{{ $item['href_desktop'] }}" target="_blank" class="link-block link-block-desktop {{ $item['href_mobile'] ? 'has-mobile-alt' : '' }}">
 										<span>{!! $item['titolo'] !!}</span>
 										<div class="freccia"></div>
 									</a>
+									@if($item['href_mobile'])
+										<a href="{{ $item['href_mobile'] }}" target="_blank" class="link-block link-block-mobile">
+											<span>{!! $item['titolo'] !!}</span>
+											<div class="freccia"></div>
+										</a>
+									@endif
 								</li>
 							@endforeach						
 						</ul>
@@ -562,15 +593,18 @@
 					<div style="flex:1;">
 						<ul style="list-style: none;">
 							@foreach($bilanci_2 as $item)
-								@php
-									$link = $item['pdf'] ? mostra_pdf_url($item['pdf'], $item['titolo'], 'bilanci') : $item['link'];
-								@endphp
 								<li>
 									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="{!! $item['titolo'] !!} - Rendicontazione di Sostenibilità - {{ config('app.name') }}">
-									<a href="{{ $link }}" target="_blank" class="link-block" style="margin-bottom:42.5px;">
+									<a href="{{ $item['href_desktop'] }}" target="_blank" class="link-block link-block-desktop {{ $item['href_mobile'] ? 'has-mobile-alt' : '' }}" style="margin-bottom:42.5px;">
 										<span>{!! $item['titolo'] !!}</span>
 										<div class="freccia"></div>
 									</a>
+									@if($item['href_mobile'])
+										<a href="{{ $item['href_mobile'] }}" target="_blank" class="link-block link-block-mobile" style="margin-bottom:42.5px;">
+											<span>{!! $item['titolo'] !!}</span>
+											<div class="freccia"></div>
+										</a>
+									@endif
 								</li>
 							@endforeach
 						</ul>

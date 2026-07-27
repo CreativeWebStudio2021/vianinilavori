@@ -15,6 +15,8 @@ $arr_rec = $risu_rec->fetch();
 $n_titolo = htmlspecialchars($arr_rec['titolo'], ENT_QUOTES, 'UTF-8');
 $n_file = $arr_rec['file'];
 $n_link = $arr_rec['link'];
+$n_file_mobile = $arr_rec['file_mobile'] ?? '';
+$n_link_mobile = $arr_rec['link_mobile'] ?? '';
 
 ?>
 
@@ -26,9 +28,18 @@ $n_link = $arr_rec['link'];
 
 <script language="javascript">
 	function verifica(){
-		if (document.inserimento.titolo.value=="") alert('Titolo obbigatorio');
-		//else if (document.inserimento.file.value=="") alert('File obbigatorio');
-		else document.inserimento.submit();
+		if (document.inserimento.titolo.value=="") {
+			alert('Titolo obbligatorio');
+			return;
+		}
+		var linkDesk = (document.inserimento.link.value || '').trim();
+		var fileDesk = <?php echo json_encode((string)$n_file); ?>;
+		var fileDeskNew = (document.inserimento.file.value || '').trim();
+		if (linkDesk === '' && fileDesk === '' && fileDeskNew === '') {
+			alert('Per il desktop serve un Link oppure un File');
+			return;
+		}
+		document.inserimento.submit();
 	}
 </script>
 <?php 
@@ -76,12 +87,15 @@ else
 			<div class="mws-form-inline">
 				<?php 
 				$oggetto_admin->campo_mod("Titolo*" , "titolo" , "$n_titolo"  , "1", 'no', "$cmd", "$id_rec", "", "", "" ,"", '1');
-				$oggetto_admin->campo_mod("Link" , "link" , "$n_link"  , "1", 'no', "$cmd", "$id_rec", "", "", "" ,"", '1');
-				$oggetto_admin->campo_mod("File*" , "file" , "$n_file"  , "5", 'no', "$cmd", "$id_rec", "", "", "" ,$directory, '0');
+				$oggetto_admin->campo_mod("Link (desktop)" , "link" , "$n_link"  , "1", 'no', "$cmd", "$id_rec", "", "", "" ,"", '1');
+				$oggetto_admin->campo_mod("File (desktop)" , "file" , "$n_file"  , "5", 'no', "$cmd", "$id_rec", "", "", "" ,$directory, '0');
+				$oggetto_admin->campo_mod("Link (mobile)" , "link_mobile" , "$n_link_mobile"  , "1", 'no', "$cmd", "$id_rec", "", "", "" ,"", '1');
+				$oggetto_admin->campo_mod("File (mobile)" , "file_mobile" , "$n_file_mobile"  , "5", 'no', "$cmd", "$id_rec", "", "", "" ,$directory, '0');
 				?>
 				
 				<br/><br/>
 				<div style="margin-left:20px; padding-bottom:10px;">* <i>campi obbligatori</i></div>
+				<div style="margin-left:20px; padding-bottom:10px;"><i>Desktop e mobile sono indipendenti: puoi usare un <b>link</b> su uno e un <b>file</b> sull’altro. Per ogni dispositivo, se ci sono sia link sia file, ha priorità il file. Sotto i 768px si usa la versione mobile (se valorizzata).</i></div>
 				<div style="margin-left:20px; padding-bottom:10px;"><img align="middle" src="img/erasure.png" alt="Cancella il contenuto del campo"> <i>cliccando sulla gomma che compare vicino ad un campo si cancella il contenuto del campo stesso</i></div>
 			</div>
 			<div class="mws-button-row">

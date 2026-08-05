@@ -8,8 +8,8 @@
 	@endphp
 	<!-- Includi il file JavaScript di Google Maps con la tua API Key -->
 	<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-	
+	{{-- Font Awesome: già caricato 6.5.0 da layout --}}
+
 	<style>
         /* Imposta la dimensione della mappa */
 

@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SecurityHeaders
 {
-    /** Direttive a cui aggiungere production_origins quando allow_production_origins è true. */
-    private const PRODUCTION_ORIGIN_DIRECTIVES = [
+    /** Direttive risorse a cui aggiungere sempre site_origins (apex + www). */
+    private const SITE_ORIGIN_DIRECTIVES = [
         'script-src',
         'style-src',
         'font-src',
@@ -86,10 +86,9 @@ class SecurityHeaders
             return '';
         }
 
-        $allowProduction = (bool) config('security.csp.allow_production_origins', false);
-        $productionOrigins = config('security.csp.production_origins', []);
-        if (! is_array($productionOrigins)) {
-            $productionOrigins = [];
+        $siteOrigins = config('security.csp.site_origins', []);
+        if (! is_array($siteOrigins)) {
+            $siteOrigins = [];
         }
 
         $parts = [];
@@ -101,8 +100,8 @@ class SecurityHeaders
 
             $list = array_values($values);
 
-            if ($allowProduction && in_array($directive, self::PRODUCTION_ORIGIN_DIRECTIVES, true)) {
-                foreach ($productionOrigins as $origin) {
+            if (in_array($directive, self::SITE_ORIGIN_DIRECTIVES, true)) {
+                foreach ($siteOrigins as $origin) {
                     if (is_string($origin) && $origin !== '' && ! in_array($origin, $list, true)) {
                         $list[] = $origin;
                     }

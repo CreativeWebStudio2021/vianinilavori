@@ -31,30 +31,24 @@ return [
     'csp' => [
         'mode' => env('SECURITY_CSP_MODE', 'report-only'),
 
-        // Endpoint di raccolta violazioni (FASE 6). Null = nessuna report-uri.
+        // Endpoint di raccolta violazioni. Null = nessuna report-uri.
         'report_uri' => env('SECURITY_CSP_REPORT_URI', null),
 
-        // Solo ambiente di test: consente risorse referenziate verso www/apex.
-        'allow_production_origins' => filter_var(
-            env('SECURITY_CSP_ALLOW_PRODUCTION_ORIGINS', false),
-            FILTER_VALIDATE_BOOLEAN
-        ),
-
-        'production_origins' => [
+        // Origini del sito stesso. Servono perché i template usano URL assoluti
+        // e apex e www sono origini distinte per il browser.
+        'site_origins' => [
             'https://vianinilavori.it',
             'https://www.vianinilavori.it',
         ],
 
         /*
-        | Origini per direttiva — inventario FASE 2 (sorgente views/asset).
+        | Origini per direttiva — inventario views/asset + report CSP.
         | Domini "da runtime" (GTM/Maps) vanno aggiunti dopo raccolta violazioni.
         */
         'sources' => [
 
             'default-src' => ["'self'"],
 
-            // 67 <script> inline in 47 Blade + GTM/iubenda: 'unsafe-inline' necessario.
-            // Approccio nonce non realistico in questa fase (segnalato in FASE 2).
             'script-src' => [
                 "'self'",
                 "'unsafe-inline'",
@@ -70,11 +64,11 @@ return [
                 'https://cdn.iubenda.com',
                 'https://elfsightcdn.com',
                 'https://static.elfsight.com',
+                'https://universe-static.elfsightcdn.com',  // widget accessibilità Elfsight
                 'https://consent.cookiebot.com',
+                'https://consentcdn.cookiebot.com',         // state.js di Cookiebot
             ],
 
-            // 92 <style> + 747 style=: 'unsafe-inline' necessario.
-            // fonts.googleapis: CSS font caricati da Maps (FASE 5).
             'style-src' => [
                 "'self'",
                 "'unsafe-inline'",
@@ -83,7 +77,6 @@ return [
                 'https://fonts.googleapis.com',
             ],
 
-            // Font Awesome da cdnjs; fonts.gstatic da Maps (FASE 5); data: per data-URI.
             'font-src' => [
                 "'self'",
                 'data:',
@@ -91,7 +84,6 @@ return [
                 'https://fonts.gstatic.com',
             ],
 
-            // Self + data + thumb YouTube + icone Wikimedia (contatti/news).
             'img-src' => [
                 "'self'",
                 'data:',
@@ -100,36 +92,45 @@ return [
                 'https://maps.gstatic.com',
                 'https://maps.googleapis.com',
                 'https://www.gstatic.com',
+                'https://www.google-analytics.com',         // prudenziale, GA4
+                'https://www.google.it',                    // prudenziale, Google Ads
             ],
 
-            // Video home/progetti da asset locali; blob: tipico per PDF.js/player.
             'media-src' => [
                 "'self'",
                 'blob:',
             ],
 
-            // Embed YouTube + noscript GTM + iframe reCAPTCHA (FASE 5).
             'frame-src' => [
                 'https://www.youtube.com',
                 'https://www.youtube-nocookie.com',
                 'https://www.googletagmanager.com',
                 'https://www.google.com',
+                'https://consentcdn.cookiebot.com',         // iframe del banner consensi
             ],
 
-            // fetch/$.ajax same-origin + Maps/reCAPTCHA/GTM/iubenda/Elfsight.
             'connect-src' => [
                 "'self'",
                 'https://maps.googleapis.com',
                 'https://www.google.com',
+                'https://www.google.it',                    // Google Ads ga-audiences
                 'https://www.gstatic.com',
                 'https://www.googletagmanager.com',
+                'https://region1.analytics.google.com',     // GA4, rilevato
+                'https://www.google-analytics.com',         // prudenziale
+                'https://analytics.google.com',             // prudenziale
+                'https://stats.g.doubleclick.net',          // prudenziale
                 'https://cs.iubenda.com',
                 'https://cdn.iubenda.com',
+                'https://idb.iubenda.com',                  // telemetria iubenda
                 'https://elfsightcdn.com',
                 'https://static.elfsight.com',
+                'https://universe-static.elfsightcdn.com',  // traduzioni widget
+                'https://core.service.elfsight.com',        // boot widget
+                'https://consent.cookiebot.com',
+                'https://consentcdn.cookiebot.com',         // settings.json
             ],
 
-            // PDF.js / Maps workers (blob); da confermare in FASE 5.
             'worker-src' => [
                 "'self'",
                 'blob:',

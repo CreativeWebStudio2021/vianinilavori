@@ -87,14 +87,16 @@
 						display:none !important;
 					}
 				</style>
+				{{-- iubenda disabilitato: resta Cookiebot (anche via GTM). Ripristinare se serve. --}}
+				{{--
 				<script type="text/javascript">
 				var _iub = _iub || [];
 				_iub.csConfiguration = {"siteId":4133683,"cookiePolicyId":35139349,"lang":"it","storage":{"useSiteId":true}};
 				</script>
 				<script type="text/javascript" src="https://cs.iubenda.com/autoblocking/4133683.js"></script>
 				<script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
-				
-			
+				--}}
+
 				<!-- Google Tag Manager -->
 				<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -127,11 +129,15 @@
 			@endif
 			
 			
-			@if($_SERVER['REMOTE_ADDR']=="93.45.34.21")
+			
 				<!-- Elfsight Accessibility | Untitled Accessibility -->
 				<script src="https://elfsightcdn.com/platform.js" async></script>
 				<div class="elfsight-app-7cd7ae79-7964-4995-a504-054ebcdd9e0f" data-elfsight-app-lazy></div>
-			@endif
+
+				<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+				<script src="https://elfsightcdn.com/platform.js" async></script>
+				<div class="elfsight-app-0b7279a3-a885-43ed-87d3-6b27d47ad7d0" data-elfsight-app-lazy></div>
+			
 
 
 

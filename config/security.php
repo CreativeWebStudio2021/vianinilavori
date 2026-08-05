@@ -41,6 +41,16 @@ return [
             'https://www.vianinilavori.it',
         ],
 
+        // Elfsight fornisce tre widget: accessibilità, carosello LinkedIn e chat IA.
+        // Il servizio introduce continuamente nuovi sottodomini (widget-data, phosphor.utils,
+        // universe-static, core.service, centrifugo...), quindi si usano i caratteri jolly.
+        // Il jolly non copre il dominio nudo: 'https://elfsightcdn.com' va elencato a parte.
+        'elfsight_origins' => [
+            'https://elfsightcdn.com',
+            'https://*.elfsightcdn.com',
+            'https://*.elfsight.com',
+        ],
+
         /*
         | Origini per direttiva — inventario views/asset + report CSP.
         | Domini "da runtime" (GTM/Maps) vanno aggiunti dopo raccolta violazioni.
@@ -60,13 +70,11 @@ return [
                 'https://www.google.com',
                 'https://www.gstatic.com',
                 'https://www.googletagmanager.com',
+                'https://www.youtube.com',                  // script del player, oltre all'iframe
                 'https://cs.iubenda.com',
                 'https://cdn.iubenda.com',
-                'https://elfsightcdn.com',
-                'https://static.elfsight.com',
-                'https://universe-static.elfsightcdn.com',  // widget accessibilità Elfsight
                 'https://consent.cookiebot.com',
-                'https://consentcdn.cookiebot.com',         // state.js di Cookiebot
+                'https://consentcdn.cookiebot.com',
             ],
 
             'style-src' => [
@@ -74,14 +82,14 @@ return [
                 "'unsafe-inline'",
                 'https://cdnjs.cloudflare.com',
                 'https://cdn.jsdelivr.net',
-                'https://fonts.googleapis.com',
+                'https://fonts.googleapis.com',             // Maps (runtime)
             ],
 
             'font-src' => [
                 "'self'",
                 'data:',
                 'https://cdnjs.cloudflare.com',
-                'https://fonts.gstatic.com',
+                'https://fonts.gstatic.com',                // Maps (runtime)
             ],
 
             'img-src' => [
@@ -92,8 +100,12 @@ return [
                 'https://maps.gstatic.com',
                 'https://maps.googleapis.com',
                 'https://www.gstatic.com',
-                'https://www.google-analytics.com',         // prudenziale, GA4
-                'https://www.google.it',                    // prudenziale, Google Ads
+                'https://www.google-analytics.com',
+                'https://www.google.it',
+                'https://www.google.de',                    // pixel Ads ga-audiences (redirect geo)
+                'https://www.googletagmanager.com',         // pixel GTM
+                'https://media.licdn.com',                  // prudenziale, carosello LinkedIn
+                'https://*.licdn.com',                      // prudenziale, carosello LinkedIn
             ],
 
             'media-src' => [
@@ -106,29 +118,28 @@ return [
                 'https://www.youtube-nocookie.com',
                 'https://www.googletagmanager.com',
                 'https://www.google.com',
-                'https://consentcdn.cookiebot.com',         // iframe del banner consensi
+                'https://consentcdn.cookiebot.com',
             ],
 
             'connect-src' => [
                 "'self'",
                 'https://maps.googleapis.com',
                 'https://www.google.com',
-                'https://www.google.it',                    // Google Ads ga-audiences
+                'https://www.google.it',
+                'https://www.google.de',                    // Ads ga-audiences (redirect geo)
                 'https://www.gstatic.com',
                 'https://www.googletagmanager.com',
-                'https://region1.analytics.google.com',     // GA4, rilevato
-                'https://www.google-analytics.com',         // prudenziale
-                'https://analytics.google.com',             // prudenziale
-                'https://stats.g.doubleclick.net',          // prudenziale
+                'https://region1.analytics.google.com',
+                'https://region1.google-analytics.com',     // dominio distinto dal precedente
+                'https://www.google-analytics.com',
+                'https://analytics.google.com',
+                'https://stats.g.doubleclick.net',
                 'https://cs.iubenda.com',
                 'https://cdn.iubenda.com',
-                'https://idb.iubenda.com',                  // telemetria iubenda
-                'https://elfsightcdn.com',
-                'https://static.elfsight.com',
-                'https://universe-static.elfsightcdn.com',  // traduzioni widget
-                'https://core.service.elfsight.com',        // boot widget
+                'https://idb.iubenda.com',
                 'https://consent.cookiebot.com',
-                'https://consentcdn.cookiebot.com',         // settings.json
+                'https://consentcdn.cookiebot.com',
+                'wss://*.elfsight.com',                     // WebSocket della chat IA (Centrifugo)
             ],
 
             'worker-src' => [

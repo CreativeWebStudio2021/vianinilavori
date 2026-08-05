@@ -19,6 +19,16 @@ class SecurityHeaders
         'connect-src',
     ];
 
+    /** Direttive a cui aggiungere sempre elfsight_origins (widget Elfsight). */
+    private const ELFSIGHT_ORIGIN_DIRECTIVES = [
+        'script-src',
+        'style-src',
+        'font-src',
+        'img-src',
+        'frame-src',
+        'connect-src',
+    ];
+
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
@@ -91,6 +101,11 @@ class SecurityHeaders
             $siteOrigins = [];
         }
 
+        $elfsightOrigins = config('security.csp.elfsight_origins', []);
+        if (! is_array($elfsightOrigins)) {
+            $elfsightOrigins = [];
+        }
+
         $parts = [];
 
         foreach ($sources as $directive => $values) {
@@ -102,6 +117,14 @@ class SecurityHeaders
 
             if (in_array($directive, self::SITE_ORIGIN_DIRECTIVES, true)) {
                 foreach ($siteOrigins as $origin) {
+                    if (is_string($origin) && $origin !== '' && ! in_array($origin, $list, true)) {
+                        $list[] = $origin;
+                    }
+                }
+            }
+
+            if (in_array($directive, self::ELFSIGHT_ORIGIN_DIRECTIVES, true)) {
+                foreach ($elfsightOrigins as $origin) {
                     if (is_string($origin) && $origin !== '' && ! in_array($origin, $list, true)) {
                         $list[] = $origin;
                     }

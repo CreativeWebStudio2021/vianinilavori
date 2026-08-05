@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\IndexController;
+use App\Http\Controllers\CspReportController;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
@@ -184,6 +185,11 @@ Route::group(['middleware' => ['web']], function () {
 		->middleware('throttle:2,1'); // max 5 richieste al minuto per IP
 	Route::post('/lavora-con-noi', [IndexController::class, 'inviaLavoraConNoi'])
 		->middleware('throttle:2,1'); // max 5 richieste al minuto per IP
+
+	// Raccolta violazioni CSP (browser POST, no CSRF). Limite anti-rumore.
+	Route::post('/csp-report', CspReportController::class)
+		->middleware('throttle:60,1');
+
 
 	
 	Route::get('/{carica}.html', [IndexController::class, 'cariche'])

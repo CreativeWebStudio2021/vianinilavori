@@ -11,8 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+
+        $middleware->validateCsrfTokens(except: [
+            'csp-report',
+        ]);
     })
+
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

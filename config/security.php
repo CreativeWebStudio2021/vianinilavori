@@ -90,6 +90,8 @@ return [
                 'data:',
                 'https://cdnjs.cloudflare.com',
                 'https://fonts.gstatic.com',                // Maps (runtime)
+                'https://unpkg.com',                        // font richiamato da CSS servito dal CDN
+                'https://cdn.jsdelivr.net',                 // font richiamato da CSS servito dal CDN
             ],
 
             'img-src' => [
@@ -101,8 +103,18 @@ return [
                 'https://maps.googleapis.com',
                 'https://www.gstatic.com',
                 'https://www.google-analytics.com',
-                'https://www.google.it',
-                'https://www.google.de',                    // pixel Ads ga-audiences (redirect geo)
+                // Domini Google per paese: il pixel ga-audiences si attiva sul dominio nazionale
+                // del visitatore. Non è possibile usare caratteri jolly sul TLD, quindi si coprono
+                // solo i paesi con traffico reale (fonte: Analytics + report CSP). I visitatori da
+                // altri paesi non verranno aggiunti alle liste di remarketing: scelta consapevole.
+                'https://www.google.com',                   // Stati Uniti
+                'https://www.google.it',                    // Italia
+                'https://www.google.ch',                    // Svizzera
+                'https://www.google.ro',                    // Romania
+                'https://www.google.co.uk',                 // Regno Unito
+                'https://www.google.co.in',                 // India
+                'https://www.google.com.eg',                // Egitto, rilevato nei log
+                'https://www.google.de',                    // Germania
                 'https://www.googletagmanager.com',         // pixel GTM
                 'https://media.licdn.com',                  // prudenziale, carosello LinkedIn
                 'https://*.licdn.com',                      // prudenziale, carosello LinkedIn
@@ -124,9 +136,18 @@ return [
             'connect-src' => [
                 "'self'",
                 'https://maps.googleapis.com',
-                'https://www.google.com',
-                'https://www.google.it',
-                'https://www.google.de',                    // Ads ga-audiences (redirect geo)
+                // Domini Google per paese: il pixel ga-audiences si attiva sul dominio nazionale
+                // del visitatore. Non è possibile usare caratteri jolly sul TLD, quindi si coprono
+                // solo i paesi con traffico reale (fonte: Analytics + report CSP). I visitatori da
+                // altri paesi non verranno aggiunti alle liste di remarketing: scelta consapevole.
+                'https://www.google.com',                   // Stati Uniti
+                'https://www.google.it',                    // Italia
+                'https://www.google.ch',                    // Svizzera
+                'https://www.google.ro',                    // Romania
+                'https://www.google.co.uk',                 // Regno Unito
+                'https://www.google.co.in',                 // India
+                'https://www.google.com.eg',                // Egitto, rilevato nei log
+                'https://www.google.de',                    // Germania
                 'https://www.gstatic.com',
                 'https://www.googletagmanager.com',
                 'https://region1.analytics.google.com',

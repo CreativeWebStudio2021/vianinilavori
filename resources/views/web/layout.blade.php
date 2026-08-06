@@ -130,7 +130,15 @@
 			
 			
 			
-				
+			@if( $_SERVER['REMOTE_ADDR'] == "93.45.34.21" )
+				<!-- Elfsight Accessibility | Untitled Accessibility -->
+				<script src="https://elfsightcdn.com/platform.js" async></script>
+				<div class="elfsight-app-df5b077a-b84b-4764-8f76-29d882c7143a" data-elfsight-app-lazy></div>
+
+				<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+				<script src="https://elfsightcdn.com/platform.js" async></script>
+				<div class="elfsight-app-fcd68b24-9d7e-4298-8c01-0f4246021706" data-elfsight-app-lazy></div>
+			@endif	
 			
 
 

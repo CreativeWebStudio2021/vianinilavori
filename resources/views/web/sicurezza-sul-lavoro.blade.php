@@ -489,17 +489,31 @@
 							}
 
 						</style>
+						@php
+							$certIso45001 = DB::table('certificazioni')
+								->where('visibile', '1')
+								->where(function ($q) {
+									$q->where('nome', 'like', '%Iso 45001%')
+										->orWhere('nome', 'like', '%ISO 45001%');
+								})
+								->whereNotNull('pdf')
+								->where('pdf', '!=', '')
+								->orderBy('ordine', 'DESC')
+								->first();
+						@endphp
+						@if($certIso45001)
 						<div id="sezLink">
 							<ul>
 								<li>
 									<img class="icon-li" src="{{ asset('web/images/icon_pdf_b.png') }}" alt="Certificazione UNI ISO 45001 - Sicurezza sul lavoro - {{ config('app.name') }}">
-									<a href="{{ mostra_pdf_url('ISO_45001_2018.pdf', 'Certificato ISO 45001') }}" target="_blank" class="link-block" style="width:99%; text-wrap:wrap; margin-left:0;">
+									<a href="{{ mostra_pdf_url($certIso45001->pdf, $certIso45001->nome ?: 'Certificato ISO 45001', 'certificazioni') }}" target="_blank" class="link-block" style="width:99%; text-wrap:wrap; margin-left:0;">
 										<span>Scarica la certificazione UNI ISO 45001</span>
 										<div class="freccia"></div>
 									</a>
 								</li>
 							</ul>
-						</div>		
+						</div>
+						@endif
 				</div>		
 			</div>
 			<style>

@@ -130,13 +130,7 @@
 			
 			
 			
-				<!-- Elfsight Accessibility | Untitled Accessibility -->
-				<script src="https://elfsightcdn.com/platform.js" async></script>
-				<div class="elfsight-app-7cd7ae79-7964-4995-a504-054ebcdd9e0f" data-elfsight-app-lazy></div>
-
-				<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
-				<script src="https://elfsightcdn.com/platform.js" async></script>
-				<div class="elfsight-app-0b7279a3-a885-43ed-87d3-6b27d47ad7d0" data-elfsight-app-lazy></div>
+				
 			
 
 

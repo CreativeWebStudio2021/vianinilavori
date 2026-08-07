@@ -23,6 +23,7 @@ id_ed25519*
 /public/build
 /public/hot
 /public/storage
+/public/sitemap.xml
 /storage/
 /bootstrap/cache/*
 !/bootstrap/cache/.gitignore

@@ -70,8 +70,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://63.178.20.232'),
-    'dir_up_prod' => env('APP_DIR_UP_PROD', 'http://63.178.20.232'),
+    'url' => env('APP_URL', 'https://www.vianinilavori.it'),
+    'dir_up_prod' => env('APP_DIR_UP_PROD', 'https://www.vianinilavori.it'),
 
     /*
     |--------------------------------------------------------------------------

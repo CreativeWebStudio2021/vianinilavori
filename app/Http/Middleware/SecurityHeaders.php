@@ -42,6 +42,10 @@ class SecurityHeaders
 
     private function applyBaseHeaders(Response $response): void
     {
+        // Tenta di rimuovere l'header "Server" per non esporre software/versione.
+        // Nota: se e' Apache ad aggiungerlo dopo PHP, potrebbe non essere rimosso a questo livello.
+        @header_remove('Server');
+
         $response->headers->set('X-Content-Type-Options', 'nosniff');
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
         $response->headers->set('Permissions-Policy', 'geolocation=(), camera=(), microphone=()');

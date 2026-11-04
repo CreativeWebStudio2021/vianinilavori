@@ -1,7 +1,10 @@
 RewriteEngine On
-RewriteBase /public/resarea/
+RewriteBase /resarea/
 
 Options -Indexes
+
+# URL pubblici archivio senza esporre /resarea/
+RewriteRule ^archivio/(.*)$ /archivio/$1 [L,R=301]
 
 RewriteRule amministrazione-logout.html	admin.php?cmd=destroy [L]
 RewriteRule amministrazione.html admin.php [L]

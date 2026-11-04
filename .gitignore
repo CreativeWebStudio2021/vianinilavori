@@ -17,6 +17,9 @@ id_ed25519*
 *.key
 /node_modules
 /public/bilanci/
+/public/resarea/archivio/*
+!/public/resarea/archivio/.htaccess
+!/public/resarea/archivio/.gitkeep
 /public/resarea/video/
 /public/resarea/img_up/
 /public/resarea/files/lavora_con_noi/

@@ -11,6 +11,9 @@
 	# Escludi la cartella /bilanci da rewrite
 	RewriteCond %{REQUEST_URI} !^/bilanci/
 	RewriteCond %{REQUEST_URI} !^/bilanci/.*
+	# Escludi l'archivio documentale pubblico
+	RewriteCond %{REQUEST_URI} !^/archivio/
+	RewriteCond %{REQUEST_URI} !^/archivio/.*
 
 
     # Handle Authorization Header

@@ -147,7 +147,16 @@
 								<div style="clear:both"></div>
 							</a>
 						</div>
-					</li>	
+					</li>
+					<li style="margin-top:20px">
+						<div style="padding:10px" <?php  if ($cmd=="archivio") { ?>class="activeMenu"<?php  } ?>>
+							<a href="admin.php?cmd=archivio">
+								<div class="iconMenu"><i class="fa-solid fa-box-archive fa-2x"></i></div>
+								<div class="textMenu">Archivio</div>
+								<div style="clear:both"></div>
+							</a>
+						</div>
+					</li>
 				<?php }?>									
 				<li style="margin-top:20px">
 					<div style="padding:10px" <?php  if ($cmd=="testi") { ?>class="activeMenu"<?php  } ?>>

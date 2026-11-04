@@ -15,8 +15,8 @@ return [
     'hsts' => [
         'enabled' => filter_var(env('SECURITY_HSTS_ENABLED', false), FILTER_VALIDATE_BOOLEAN),
 
-        // Partenza conservativa (5 minuti). Alzare solo su conferma esplicita.
-        'max_age' => (int) env('SECURITY_HSTS_MAX_AGE', 300),
+        // 1 anno. Non usare includeSubDomains/preload: ci sono altri sottodomini.
+        'max_age' => (int) env('SECURITY_HSTS_MAX_AGE', 31536000),
     ],
 
     /*

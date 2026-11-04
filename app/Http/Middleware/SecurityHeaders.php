@@ -57,7 +57,7 @@ class SecurityHeaders
             return;
         }
 
-        $maxAge = (int) config('security.hsts.max_age', 300);
+        $maxAge = (int) config('security.hsts.max_age', 31536000);
         // Mai includeSubDomains né preload (test è sottodominio di produzione).
         $response->headers->set('Strict-Transport-Security', 'max-age='.$maxAge);
     }
@@ -135,6 +135,8 @@ class SecurityHeaders
         }
 
         // Sempre in coda.
+        $parts[] = "object-src 'none'";
+        $parts[] = "base-uri 'self'";
         $parts[] = "frame-ancestors 'self'";
         $parts[] = 'upgrade-insecure-requests';
 

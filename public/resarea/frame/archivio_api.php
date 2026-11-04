@@ -300,6 +300,9 @@ function api_mkdir(string $root, string $path, string $name): array
     if (!mkdir($dest, 0775, false)) {
         throw new RuntimeException('Impossibile creare la cartella');
     }
+    // umask di PHP (022) ridurrebbe 0775 a 0755: forziamo group-write
+    // così sia il web (daemon) sia SFTP (bitnami, gruppo daemon) possono scrivere.
+    @chmod($dest, 0775);
     return ['ok' => true, 'path' => rel_from_full($root, $dest)];
 }
 

@@ -14,8 +14,8 @@
 					  z-index: -1;
 					}
 				</style>
-				<video id="background-video" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Msg_Arena_06_2026.jpg') }}?v=20261118b">
-				  <source src="{{ asset('resarea/video/Msg_Arena_06_2026.mp4') }}?v=20261118b" type="video/mp4">
+				<video id="background-video" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Msg_Arena_20261118.jpg') }}">
+				  <source src="{{ asset('resarea/video/Msg_Arena_20261118.mp4') }}" type="video/mp4">
 				  Il tuo browser non supporta il video HTML5.
 				</video>
 				
@@ -57,8 +57,8 @@
 					  z-index: -1;
 					}
 				</style>
-				<video id="background-video1" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Metro_C_06_2026.jpg') }}?v=20261118">
-				  <source src="{{ asset('resarea/video/Metro_C_06_2026.mp4') }}?v=20261118" type="video/mp4">
+				<video id="background-video1" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Metro_C_20261118.jpg') }}">
+				  <source src="{{ asset('resarea/video/Metro_C_20261118.mp4') }}" type="video/mp4">
 				  Il tuo browser non supporta il video HTML5.
 				</video> 
 
@@ -83,8 +83,8 @@
 					  z-index: -1;
 					}
 				</style>
-				<video id="background-video2" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Tai_E_Valle_Di_Cadore_06_2026.jpg') }}?v=20261118b">
-				  <source src="{{ asset('resarea/video/Tai_E_Valle_Di_Cadore_06_2026.mp4') }}?v=20261118b" type="video/mp4">
+				<video id="background-video2" autoplay muted  playsinline poster="{{ asset('resarea/video/posters/Tai_E_Valle_Di_Cadore_20261118.jpg') }}">
+				  <source src="{{ asset('resarea/video/Tai_E_Valle_Di_Cadore_20261118.mp4') }}" type="video/mp4">
 				  Il tuo browser non supporta il video HTML5.
 				</video> 
 
